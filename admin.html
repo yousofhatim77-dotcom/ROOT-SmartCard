@@ -1,182 +1,6730 @@
-﻿<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
 
 <head>
+<meta charset="UTF-8">
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>إدارة ROOT Dental Lab</title>
 
-<title>ROOT SmartCard Dashboard</title>
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+>
 
-<link rel="stylesheet" href="styles.css">
+<style>
+
+:root {
+    --bg: #060f1e;
+    --bg2: #0b1830;
+    --card: #0d1f3c;
+    --card2: #112647;
+    --border: #1a3a6e;
+    --blue: #1565c0;
+    --blue2: #42a5f5;
+    --red: #ef5350;
+    --green: #2e7d32;
+    --text: #e8f0fe;
+    --muted: #8eadcf;
+    --shadow: 0 12px 35px rgba(0,0,0,.35);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+    min-height: 100vh;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.wrap {
+    width: min(1180px, 94%);
+    margin: auto;
+}
+
+.login {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+}
+
+.login-card {
+    width: min(430px, 100%);
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 30px;
+    box-shadow: var(--shadow);
+}
+
+h1,
+h2,
+h3,
+p {
+    margin-top: 0;
+}
+
+.muted {
+    color: var(--muted);
+}
+
+label {
+    display: block;
+    margin: 14px 0 6px;
+    color: var(--muted);
+    font-size: .9rem;
+}
+
+.input {
+    width: 100%;
+    border: 1px solid var(--border);
+    background: var(--bg2);
+    color: var(--text);
+    border-radius: 12px;
+    padding: 12px;
+    outline: 0;
+}
+
+.input:focus {
+    border-color: var(--blue2);
+}
+
+.btn {
+    border: 0;
+    border-radius: 12px;
+    padding: 11px 15px;
+    cursor: pointer;
+    font-weight: 700;
+    color: #fff;
+    background: var(--blue);
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn:hover {
+    filter: brightness(1.1);
+}
+
+.btn.full {
+    width: 100%;
+    margin-top: 18px;
+}
+
+.btn.secondary {
+    background: var(--card2);
+    border: 1px solid var(--border);
+}
+
+.btn.danger {
+    background: var(--red);
+}
+
+.btn.success {
+    background: var(--green);
+}
+
+.btn.small {
+    padding: 8px 10px;
+    font-size: .83rem;
+}
+
+.status {
+    min-height: 20px;
+    margin-top: 12px;
+    color: var(--blue2);
+    font-size: .9rem;
+}
+
+.status.err {
+    color: #ff8a80;
+}
+
+.top {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+
+    background: rgba(6,15,30,.94);
+    backdrop-filter: blur(14px);
+
+    border-bottom: 1px solid var(--border);
+}
+
+.top-inner {
+    min-height: 70px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 14px;
+}
+
+.brand {
+    font-weight: 800;
+    font-size: 1.1rem;
+}
+
+.top-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.top a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.content {
+    padding: 28px 0 60px;
+}
+
+.notice {
+    background: rgba(21,101,192,.12);
+    border: 1px solid var(--border);
+
+    padding: 14px 16px;
+    border-radius: 14px;
+
+    color: var(--muted);
+
+    margin-bottom: 20px;
+}
+
+.grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(0, 1fr)
+        );
+
+    gap: 18px;
+}
+
+.panel {
+    background: var(--card);
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius: 20px;
+
+    padding: 20px;
+
+    box-shadow: var(--shadow);
+}
+
+.panel.full {
+    grid-column: 1 / -1;
+}
+
+.panel-head {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 12px;
+
+    margin-bottom: 16px;
+}
+
+.panel-head h2 {
+    margin: 0;
+
+    font-size: 1.05rem;
+}
+
+.asset-row {
+    display: grid;
+
+    grid-template-columns:
+        100px 1fr;
+
+    gap: 14px;
+
+    align-items: center;
+
+    padding: 12px 0;
+
+    border-bottom:
+        1px solid
+        var(--border);
+}
+
+.asset-row:last-child {
+    border-bottom: 0;
+}
+
+.thumb {
+    width: 100px;
+    height: 100px;
+
+    object-fit: contain;
+
+    background: var(--bg2);
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius: 14px;
+}
+
+.inline {
+    display: flex;
+
+    gap: 8px;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+}
+
+.inline .input {
+    flex: 1;
+
+    min-width: 190px;
+}
+
+.cards {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            3,
+            minmax(0, 1fr)
+        );
+
+    gap: 14px;
+}
+
+.project-card,
+.media-card {
+    background: var(--bg2);
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius: 16px;
+
+    overflow: hidden;
+}
+
+.project-cover {
+    width: 100%;
+
+    aspect-ratio: 1 / 1;
+
+    object-fit: cover;
+
+    background: #06101f;
+}
+
+.card-body {
+    padding: 12px;
+}
+
+.card-title {
+    font-weight: 800;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    margin-bottom: 10px;
+}
+
+.card-actions {
+    display: flex;
+
+    gap: 7px;
+
+    flex-wrap: wrap;
+}
+
+.pricing-grid,
+.media-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            4,
+            minmax(0, 1fr)
+        );
+
+    gap: 12px;
+
+    margin-top: 16px;
+}
+
+.media-preview {
+    width: 100%;
+
+    aspect-ratio: 1 / 1;
+
+    object-fit: cover;
+
+    background: #06101f;
+}
+
+.file-icon {
+    aspect-ratio: 1 / 1;
+
+    display: grid;
+
+    place-items: center;
+
+    font-size: 2.3rem;
+
+    background: #06101f;
+
+    color: var(--blue2);
+}
+
+.media-name {
+    padding: 9px;
+
+    font-size: .75rem;
+
+    color: var(--muted);
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+.media-actions {
+    display: flex;
+
+    gap: 6px;
+
+    padding:
+        0 9px 9px;
+
+    flex-wrap: wrap;
+}
+
+.modal {
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        rgba(0,0,0,.78);
+
+    display: grid;
+
+    place-items: center;
+
+    padding: 18px;
+
+    z-index: 50;
+}
+
+.modal-box {
+    width:
+        min(
+            980px,
+            100%
+        );
+
+    max-height: 92vh;
+
+    overflow: auto;
+
+    background: var(--card);
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius: 22px;
+
+    padding: 20px;
+}
+
+.modal-head {
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        center;
+
+    gap: 12px;
+
+    margin-bottom: 16px;
+}
+
+.modal-head h2 {
+    margin: 0;
+}
+
+.close {
+    width: 38px;
+    height: 38px;
+
+    border-radius: 50%;
+
+    border:
+        1px solid
+        var(--border);
+
+    background:
+        var(--card2);
+
+    color: #fff;
+
+    cursor: pointer;
+}
+
+.split {
+    display: grid;
+
+    grid-template-columns:
+        280px 1fr;
+
+    gap: 18px;
+}
+
+.cover-admin img {
+    width: 100%;
+
+    aspect-ratio:
+        1 / 1;
+
+    object-fit: cover;
+
+    border-radius: 16px;
+
+    background: var(--bg2);
+}
+
+.empty {
+    padding: 24px;
+
+    text-align: center;
+
+    color: var(--muted);
+
+    border:
+        1px dashed
+        var(--border);
+
+    border-radius: 14px;
+}
+
+.spinner {
+    display: inline-block;
+
+    width: 16px;
+    height: 16px;
+
+    border:
+        2px solid
+        rgba(255,255,255,.35);
+
+    border-top-color: white;
+
+    border-radius: 50%;
+
+    animation:
+        spin .7s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform:
+            rotate(360deg);
+    }
+}
+
+@media (max-width: 850px) {
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .panel.full {
+        grid-column: auto;
+    }
+
+    .cards {
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0,1fr)
+            );
+    }
+
+    .pricing-grid,
+    .media-grid {
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0,1fr)
+            );
+    }
+
+    .split {
+        grid-template-columns: 1fr;
+    }
+
+    .cover-admin {
+        max-width: 320px;
+    }
+
+    .top-inner {
+        padding: 10px 0;
+
+        align-items:
+            flex-start;
+
+        flex-direction:
+            column;
+    }
+}
+
+
+/* ROOT CMS EDITOR V8 CSS */
+
+.cms-text-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.cms-field {
+    min-width: 0;
+}
+
+.cms-field.full {
+    grid-column: 1 / -1;
+}
+
+textarea.input {
+    min-height: 90px;
+    resize: vertical;
+}
+
+.rename-box {
+    margin: 16px 0;
+    padding: 14px;
+    background: rgba(66, 165, 245, .06);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+}
+
+@media (max-width: 700px) {
+
+    .cms-text-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cms-field.full {
+        grid-column: auto;
+    }
+
+}
+
+/* ROOT CMS EDITOR V8 CSS END */
+
+
+/* ROOT MEDIA CAPTION ADMIN CSS V11 */
+
+.media-caption-editor {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: rgba(66, 165, 245, .045);
+}
+
+.media-caption-editor label {
+    margin: 0 0 7px;
+    font-size: .78rem;
+}
+
+.media-caption-input {
+    font-size: .84rem;
+}
+
+.media-caption-save {
+    width: 100%;
+    margin-top: 8px;
+    justify-content: center;
+}
+
+/* ROOT MEDIA CAPTION ADMIN CSS V11 END */
+
+
+/* ROOT CAPTION UI FIX V12 CSS */
+
+.root-caption-editor {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+
+    background:
+        rgba(66, 165, 245, .055);
+
+    border:
+        1px solid var(--border);
+
+    border-radius:
+        12px;
+}
+
+.root-caption-editor label {
+    margin:
+        0 0 7px;
+
+    font-size:
+        .78rem;
+
+    color:
+        var(--muted);
+}
+
+.root-caption-editor .input {
+    width:
+        100%;
+
+    padding:
+        9px 10px;
+
+    font-size:
+        .82rem;
+}
+
+.root-caption-save {
+    width:
+        100%;
+
+    margin-top:
+        8px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    gap:
+        6px;
+}
+
+/* ROOT CAPTION UI FIX V12 CSS END */
+
+
+/* ROOT MULTI TENANT SMART CARDS */
+
+.root-smart-grid {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(
+                0,
+                1fr
+            )
+        );
+
+    gap:
+        14px;
+
+    margin-top:
+        20px;
+
+}
+
+
+.root-smart-card {
+
+    background:
+        var(--bg2);
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:
+        18px;
+
+    padding:
+        16px;
+
+}
+
+
+.root-smart-head {
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    gap:
+        12px;
+
+    margin-bottom:
+        14px;
+
+}
+
+
+.root-smart-code {
+
+    color:
+        var(--muted);
+
+    font-family:
+        Consolas,
+        monospace;
+
+    direction:
+        ltr;
+
+    font-size:
+        .8rem;
+
+}
+
+
+.root-smart-qr {
+
+    width:
+        fit-content;
+
+    background:
+        white;
+
+    padding:
+        12px;
+
+    border-radius:
+        15px;
+
+    margin:
+        16px auto;
+
+}
+
+
+.root-smart-link {
+
+    direction:
+        ltr;
+
+    text-align:
+        left;
+
+    overflow-wrap:
+        anywhere;
+
+    padding:
+        10px;
+
+    border:
+        1px solid
+        var(--border);
+
+    border-radius:
+        10px;
+
+    color:
+        var(--muted);
+
+    font-size:
+        .78rem;
+
+    margin-bottom:
+        12px;
+
+}
+
+
+@media (max-width: 700px) {
+
+    .root-smart-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+}
+
+</style>
 
 </head>
 
-
 <body>
 
-
-<main class="shell dashboard">
-
-
-<header class="topbar">
-
-<strong>
-ROOT SmartCard
-</strong>
-
-<button
-id="logoutBtn"
-class="btn hidden"
-type="button"
+<section
+    id="loginView"
+    class="login"
 >
-Sign out
-</button>
 
-</header>
-
-
-
-<section
-id="configWarning"
-class="notice hidden"
-></section>
-
-
-
-<section
-id="loginView"
-class="panel auth-panel"
+<form
+    id="loginForm"
+    class="login-card"
 >
 
 <h1>
-Dashboard
+    لوحة إدارة ROOT Dental Lab
 </h1>
 
 <p class="muted">
-Manage the destination linked to your physical QR / NFC card.
+    تسجيل دخول الإدارة باستخدام Supabase Auth.
 </p>
 
-
-<form id="loginForm">
-
-<label>
-Email
-<input
-id="email"
-type="email"
-required
->
+<label for="email">
+    البريد الإلكتروني
 </label>
 
-
-<label>
-Password
 <input
-id="password"
-type="password"
-required
+    id="email"
+    class="input"
+    type="email"
+    autocomplete="username"
+    required
 >
+
+<label for="password">
+    كلمة المرور
 </label>
 
+<input
+    id="password"
+    class="input"
+    type="password"
+    autocomplete="current-password"
+    required
+>
 
 <button
-class="btn primary"
-type="submit"
+    id="loginBtn"
+    class="btn full"
+    type="submit"
 >
-Sign in
+
+<i class="fa-solid fa-right-to-bracket"></i>
+
+دخول
+
 </button>
 
+<div
+    id="loginStatus"
+    class="status"
+></div>
+
 </form>
-
-
-<p
-id="loginStatus"
-class="status"
-></p>
 
 </section>
 
 
-
-<section
-id="dashboardView"
-class="hidden"
+<div
+    id="dashboard"
+    class="hidden"
 >
 
-<div class="panel">
+<header class="top">
 
-<h2>
-Create Smart Card
-</h2>
+<div class="wrap top-inner">
 
+<div class="brand">
+    ROOT Dental Lab — إدارة الموقع
+</div>
 
-<form id="createForm">
+<div class="top-actions">
 
-<label>
-Card name
-
-<input
-id="cardName"
-type="text"
-placeholder="My Business Card"
-required
+<a
+    class="btn secondary small"
+    href="index.html"
+    target="_blank"
 >
 
-</label>
+<i class="fa-solid fa-arrow-up-right-from-square"></i>
 
+عرض الموقع
 
-<label>
-Destination URL
-
-<input
-id="destinationUrl"
-type="url"
-placeholder="https://example.com"
-required
->
-
-</label>
-
+</a>
 
 <button
-class="btn primary"
-type="submit"
+    id="refreshAllBtn"
+    class="btn secondary small"
+    type="button"
 >
-Create Card
+
+<i class="fa-solid fa-rotate"></i>
+
+تحديث
+
+</button>
+
+<button
+    id="logoutBtn"
+    class="btn danger small"
+    type="button"
+>
+
+<i class="fa-solid fa-right-from-bracket"></i>
+
+خروج
+
+</button>
+
+</div>
+
+</div>
+
+</header>
+
+
+<main class="wrap content">
+
+<div
+    id="globalStatus"
+    class="notice"
+>
+    جاهز.
+</div>
+
+
+<div class="grid">
+
+
+<section class="panel">
+
+<div class="panel-head">
+
+<h2>
+
+<i class="fa-regular fa-image"></i>
+
+الهوية والصور العامة
+
+</h2>
+
+</div>
+
+
+<div class="asset-row">
+
+<img
+    id="logoPreview"
+    class="thumb"
+    alt="Logo"
+>
+
+<div>
+
+<strong>
+    الشعار الرئيسي
+</strong>
+
+<label>
+    استبدال الشعار
+</label>
+
+<div class="inline">
+
+<input
+    id="logoFile"
+    class="input"
+    type="file"
+    accept="image/*"
+>
+
+<button
+    id="logoReplaceBtn"
+    class="btn small"
+    type="button"
+>
+    استبدال
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="asset-row">
+
+<img
+    id="aboutPreview"
+    class="thumb"
+    alt="About"
+>
+
+<div>
+
+<strong>
+    صورة صفحة شعارنا
+</strong>
+
+<label>
+    استبدال الصورة
+</label>
+
+<div class="inline">
+
+<input
+    id="aboutFile"
+    class="input"
+    type="file"
+    accept="image/*"
+>
+
+<button
+    id="aboutReplaceBtn"
+    class="btn small"
+    type="button"
+>
+    استبدال
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section class="panel">
+
+<div class="panel-head">
+
+<h2>
+
+<i class="fa-solid fa-folder-plus"></i>
+
+إضافة مشروع
+
+</h2>
+
+</div>
+
+
+<form id="createProjectForm">
+
+<label>
+    اسم المشروع
+</label>
+
+<input
+    id="newProjectName"
+    class="input"
+    required
+    placeholder="مثال: Zircon Crowns"
+>
+
+<label>
+    صورة الغلاف
+</label>
+
+<input
+    id="newProjectCover"
+    class="input"
+    type="file"
+    accept="image/*"
+    required
+>
+
+<button
+    id="createProjectBtn"
+    class="btn full"
+    type="submit"
+>
+
+<i class="fa-solid fa-plus"></i>
+
+إنشاء المشروع
+
 </button>
 
 </form>
 
+</section>
+
+
+<section class="panel full">
+
+<div class="panel-head">
+
+<h2>
+
+<i class="fa-solid fa-images"></i>
+
+المشاريع
+
+</h2>
+
+<span
+    id="projectCount"
+    class="muted"
+></span>
+
+</div>
+
+<div
+    id="projectsGrid"
+    class="cards"
+></div>
+
+</section>
+
+
+<section class="panel full">
+
+<div class="panel-head">
+
+<h2>
+
+<i class="fa-solid fa-tags"></i>
+
+قائمة الأسعار
+
+</h2>
+
+</div>
+
+<div class="inline">
+
+<input
+    id="pricingFiles"
+    class="input"
+    type="file"
+    accept="image/*"
+    multiple
+>
+
+<button
+    id="pricingAddBtn"
+    class="btn"
+    type="button"
+>
+
+<i class="fa-solid fa-plus"></i>
+
+إضافة صفحات
+
+</button>
+
+</div>
 
 <p
-id="createStatus"
-class="status"
-></p>
+    class="muted"
+    style="margin-top:10px"
+>
+    الملفات الجديدة يتم ترتيبها تلقائيًا بالأرقام.
+</p>
+
+<div
+    id="pricingGrid"
+    class="pricing-grid"
+></div>
+
+</section>
 
 </div>
 
 
 
-<div
-id="cards"
-class="cards"
-></div>
+<section
+    class="panel full"
+    id="siteTextsPanel"
+    style="margin-top:18px"
+>
 
+<div class="panel-head">
+
+    <h2>
+
+        <i class="fa-solid fa-pen-to-square"></i>
+
+        نصوص وبيانات الموقع
+
+    </h2>
+
+</div>
+
+
+<form id="siteTextsForm">
+
+<div class="cms-text-grid">
+
+
+<div class="cms-field">
+
+<label for="siteBrandName">
+    اسم البراند
+</label>
+
+<input
+    id="siteBrandName"
+    class="input"
+    type="text"
+>
+
+</div>
+
+
+<div class="cms-field">
+
+<label for="siteBrowserTitle">
+    عنوان المتصفح
+</label>
+
+<input
+    id="siteBrowserTitle"
+    class="input"
+    type="text"
+>
+
+</div>
+
+
+<div class="cms-field">
+
+<label for="siteNavProducts">
+    اسم تبويب المنتجات
+</label>
+
+<input
+    id="siteNavProducts"
+    class="input"
+    type="text"
+>
+
+</div>
+
+
+<div class="cms-field">
+
+<label for="siteNavAbout">
+    اسم تبويب شعارنا
+</label>
+
+<input
+    id="siteNavAbout"
+    class="input"
+    type="text"
+>
+
+</div>
+
+
+<div class="cms-field">
+
+<label for="siteNavPricing">
+    اسم تبويب قائمة الأسعار
+</label>
+
+<input
+    id="siteNavPricing"
+    class="input"
+    type="text"
+>
+
+</div>
+
+
+<div class="cms-field">
+
+<label for="siteFacebookLabel">
+    النص الظاهر لفيسبوك
+</label>
+
+<input
+    id="siteFacebookLabel"
+    class="input"
+    type="text"
+>
+
+</div>
+
+
+<div class="cms-field full">
+
+<label for="siteFacebookUrl">
+    رابط Facebook
+</label>
+
+<input
+    id="siteFacebookUrl"
+    class="input"
+    type="url"
+>
+
+</div>
+
+
+<div class="cms-field">
+
+<label for="siteWhatsappLabel">
+    النص الظاهر لواتساب
+</label>
+
+<input
+    id="siteWhatsappLabel"
+    class="input"
+    type="text"
+>
+
+</div>
+
+
+<div class="cms-field">
+
+<label for="siteWhatsappNumber">
+    رقم واتساب
+</label>
+
+<input
+    id="siteWhatsappNumber"
+    class="input"
+    type="text"
+    placeholder="201040296832"
+>
+
+</div>
+
+
+<div class="cms-field">
+
+<label for="sitePhoneLabel">
+    النص الظاهر للهاتف
+</label>
+
+<input
+    id="sitePhoneLabel"
+    class="input"
+    type="text"
+>
+
+</div>
+
+
+<div class="cms-field">
+
+<label for="sitePhoneNumber">
+    رقم الاتصال
+</label>
+
+<input
+    id="sitePhoneNumber"
+    class="input"
+    type="text"
+    placeholder="+201040296832"
+>
+
+</div>
+
+
+</div>
+
+
+<button
+    id="saveSiteTextsBtn"
+    class="btn full"
+    type="submit"
+    style="margin-top:18px"
+>
+
+    <i class="fa-solid fa-floppy-disk"></i>
+
+    حفظ نصوص الموقع
+
+</button>
+
+</form>
 
 </section>
 
 
+<section
+    class="panel full"
+    id="rootTabNarrationPanel"
+    style="margin-top:18px"
+>
+
+    <div class="panel-head">
+
+        <h2>
+            <i class="fa-solid fa-comment-dots"></i>
+            شرح التبويبات بالصوت
+        </h2>
+
+    </div>
+
+
+    <form id="rootTabNarrationForm">
+
+        <div class="cms-text-grid">
+
+
+            <div class="cms-field full">
+
+                <label for="rootProductsIntro">
+                    الكلام عند فتح تبويب منتجاتنا
+                </label>
+
+                <textarea
+                    id="rootProductsIntro"
+                    class="input"
+                    rows="4"
+                    placeholder="اكتب الشرح الذي سيقوله الشعار..."
+                ></textarea>
+
+            </div>
+
+
+            <div class="cms-field full">
+
+                <label for="rootAboutIntro">
+                    الكلام عند فتح تبويب شعارنا
+                </label>
+
+                <textarea
+                    id="rootAboutIntro"
+                    class="input"
+                    rows="4"
+                    placeholder="اكتب الشرح الذي سيقوله الشعار..."
+                ></textarea>
+
+            </div>
+
+
+            <div class="cms-field full">
+
+                <label for="rootPricingIntro">
+                    الكلام عند فتح تبويب قائمة الأسعار
+                </label>
+
+                <textarea
+                    id="rootPricingIntro"
+                    class="input"
+                    rows="4"
+                    placeholder="اكتب الشرح الذي سيقوله الشعار..."
+                ></textarea>
+
+            </div>
+
+
+        </div>
+
+
+        <button
+            id="rootSaveTabNarration"
+            class="btn full"
+            type="submit"
+            style="margin-top:18px"
+        >
+
+            <i class="fa-solid fa-floppy-disk"></i>
+
+            حفظ شرح التبويبات
+
+        </button>
+
+
+        <div
+            id="rootTabNarrationStatus"
+            style="
+                margin-top:12px;
+                min-height:20px;
+                opacity:.8;
+                font-size:.88rem;
+            "
+        ></div>
+
+    </form>
+
+</section>
+
+
+<section
+    class="panel full"
+    id="rootSmartCardPanel"
+    style="margin-top:18px"
+>
+
+<div class="panel-head">
+
+<h2>
+    <i class="fa-solid fa-qrcode"></i>
+    الكروت والـ QR الذكي
+</h2>
+
+</div>
+
+
+<p class="muted">
+    أنشئ رابطًا ثابتًا للكارت أو الـ NFC ثم غيّر وجهته في أي وقت.
+</p>
+
+
+<form id="rootCreateSmartCardForm">
+
+<div class="cms-text-grid">
+
+
+<div class="cms-field">
+
+<label for="rootSmartCardName">
+    اسم الكارت
+</label>
+
+<input
+    id="rootSmartCardName"
+    class="input"
+    type="text"
+    placeholder="Business Card"
+    required
+>
+
+</div>
+
+
+<div class="cms-field">
+
+<label for="rootSmartCardDestination">
+    الرابط الذي يفتح عند المسح
+</label>
+
+<input
+    id="rootSmartCardDestination"
+    class="input"
+    type="url"
+    placeholder="https://..."
+>
+
+</div>
+
+
+</div>
+
+
+<button
+    id="rootCreateSmartCardBtn"
+    class="btn full"
+    type="submit"
+    style="margin-top:18px"
+>
+
+<i class="fa-solid fa-plus"></i>
+
+إنشاء QR ذكي
+
+</button>
+
+
+<div
+    id="rootSmartCardStatus"
+    class="status"
+></div>
+
+</form>
+
+
+<div
+    id="rootSmartCardsGrid"
+    class="root-smart-grid"
+></div>
+
+</section>
+
 </main>
 
+</div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 
-<script src="config.js"></script>
-<script src="app.js"></script>
+<div
+    id="projectModal"
+    class="modal hidden"
+>
 
+<div class="modal-box">
+
+<div class="modal-head">
+
+<h2 id="modalProjectName">
+    إدارة المشروع
+</h2>
+
+<button
+    id="closeModalBtn"
+    class="close"
+    type="button"
+>
+
+<i class="fa-solid fa-xmark"></i>
+
+</button>
+
+</div>
+
+
+<div class="split">
+
+
+<aside class="cover-admin">
+
+<img
+    id="modalCover"
+    alt="Project cover"
+>
+
+<div class="rename-box">
+
+    <label for="renameProjectInput">
+        اسم المشروع
+    </label>
+
+    <input
+        id="renameProjectInput"
+        class="input"
+        type="text"
+        placeholder="اسم المشروع"
+    >
+
+    <button
+        id="renameProjectBtn"
+        class="btn full"
+        type="button"
+        style="margin-top:10px"
+    >
+
+        <i class="fa-solid fa-pen"></i>
+
+        حفظ الاسم الجديد
+
+    </button>
+
+</div>
+
+
+<label>
+    استبدال الغلاف
+</label>
+
+<input
+    id="replaceCoverFile"
+    class="input"
+    type="file"
+    accept="image/*"
+>
+
+<button
+    id="replaceCoverBtn"
+    class="btn full"
+    type="button"
+>
+
+<i class="fa-solid fa-rotate"></i>
+
+استبدال الغلاف
+
+</button>
+
+<button
+    id="deleteProjectBtn"
+    class="btn danger full"
+    type="button"
+>
+
+<i class="fa-solid fa-trash"></i>
+
+حذف المشروع بالكامل
+
+</button>
+
+</aside>
+
+
+<section>
+
+<h3>
+    صور وملفات المشروع
+</h3>
+
+<div class="inline">
+
+<input
+    id="addMediaFiles"
+    class="input"
+    type="file"
+    accept="image/*,video/*,.pdf"
+    multiple
+>
+
+<button
+    id="addMediaBtn"
+    class="btn"
+    type="button"
+>
+
+<i class="fa-solid fa-plus"></i>
+
+إضافة ملفات
+
+</button>
+
+</div>
+
+<div
+    id="mediaGrid"
+    class="media-grid"
+></div>
+
+</section>
+
+
+</div>
+
+</div>
+
+</div>
+
+
+<input
+    id="replacePicker"
+    class="hidden"
+    type="file"
+>
+
+
+<script>
+
+const SUPABASE_URL =
+    'https://fjvgsfqipiabwiliqygs.supabase.co';
+
+const SUPABASE_ANON_KEY =
+    'sb_publishable_xS7bZ6d7N7-532PLuAnX7w_ESAGf0zA';
+
+const BUCKET =
+    'root-smartcard-sites';
+
+
+let currentClient =
+    null;
+
+
+let TENANT_ROOT =
+    '';
+
+
+let PORTFOLIO_ROOT =
+    '';
+
+
+let PRICING_ROOT =
+    '';
+
+
+let LOGO_PATH =
+    '';
+
+
+let ABOUT_PATH =
+    '';
+
+
+const SESSION_KEY =
+    'root_smartcard_client_admin_session_v1';
+
+
+let SITE_CONFIG_PATH =
+    '';
+
+let session = null;
+
+let projects = [];
+
+let pricing = [];
+
+let currentProject = null;
+
+let pendingReplace = null;
+
+
+const $ =
+    id =>
+        document.getElementById(
+            id
+        );
+
+
+function encodePath(path) {
+
+    return String(
+        path || ''
+    )
+    .split('/')
+    .map(
+        encodeURIComponent
+    )
+    .join('/');
+
+}
+
+
+function publicUrl(path) {
+
+    return (
+        `${SUPABASE_URL}` +
+        `/storage/v1/object/public/` +
+        `${BUCKET}/` +
+        `${encodePath(path)}` +
+        `?v=${Date.now()}`
+    );
+
+}
+
+
+function isFolder(item) {
+
+    return (
+        item &&
+        !item.id &&
+        !item.metadata
+    );
+
+}
+
+
+function isImage(name) {
+
+    return (
+        /\.(png|jpe?g|webp|gif|bmp|avif|svg)$/i
+    ).test(
+        name || ''
+    );
+
+}
+
+
+function isVideo(name) {
+
+    return (
+        /\.(mp4|webm|ogg|mov|m4v|avi)$/i
+    ).test(
+        name || ''
+    );
+
+}
+
+
+function escapeHtml(value) {
+
+    return String(
+        value ?? ''
+    )
+    .replace(
+        /[&<>"']/g,
+        character => ({
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#039;'
+        })[character]
+    );
+
+}
+
+
+function safeSegment(value) {
+
+    return String(
+        value || ''
+    )
+    .trim()
+    .replace(
+        /[\\\/]+/g,
+        '-'
+    )
+    .replace(
+        /\s+/g,
+        ' '
+    )
+    .replace(
+        /^\.+|\.+$/g,
+        ''
+    );
+
+}
+
+
+function safeFileName(value) {
+
+    return String(
+        value || 'file'
+    )
+    .replace(
+        /[\\\/]+/g,
+        '-'
+    )
+    .replace(
+        /[^\p{L}\p{N}._()\- ]/gu,
+        '-'
+    )
+    .replace(
+        /\s+/g,
+        ' '
+    )
+    .trim() || 'file';
+
+}
+
+
+function setStatus(
+    message,
+    isError = false
+) {
+
+    const element =
+        $('globalStatus');
+
+    element.textContent =
+        message;
+
+    element.style.color =
+        isError
+            ? '#ff8a80'
+            : 'var(--muted)';
+
+}
+
+
+function saveSession(value) {
+
+    session =
+        value;
+
+    localStorage.setItem(
+        SESSION_KEY,
+        JSON.stringify(
+            value
+        )
+    );
+
+}
+
+
+function clearSession() {
+
+    session =
+        null;
+
+    localStorage.removeItem(
+        SESSION_KEY
+    );
+
+}
+
+
+function expiresSoon() {
+
+    return (
+        !session?.expires_at ||
+        Date.now() / 1000 >
+            Number(
+                session.expires_at
+            ) - 45
+    );
+
+}
+
+
+async function authRequest(
+    path,
+    body
+) {
+
+    const response =
+        await fetch(
+            `${SUPABASE_URL}/auth/v1/${path}`,
+            {
+                method: 'POST',
+
+                headers: {
+                    apikey:
+                        SUPABASE_ANON_KEY,
+
+                    'Content-Type':
+                        'application/json'
+                },
+
+                body:
+                    JSON.stringify(
+                        body
+                    )
+            }
+        );
+
+
+    const data =
+        await response
+            .json()
+            .catch(
+                () => ({})
+            );
+
+
+    if (
+        !response.ok
+    ) {
+
+        throw new Error(
+            data.msg ||
+            data.error_description ||
+            data.message ||
+            `Auth ${response.status}`
+        );
+
+    }
+
+
+    return data;
+
+}
+
+
+async function login(
+    email,
+    password
+) {
+
+    const data =
+        await authRequest(
+            'token?grant_type=password',
+            {
+                email,
+                password
+            }
+        );
+
+
+    saveSession({
+
+        access_token:
+            data.access_token,
+
+        refresh_token:
+            data.refresh_token,
+
+        expires_at:
+            Math.floor(
+                Date.now() / 1000
+            ) +
+            Number(
+                data.expires_in ||
+                3600
+            ),
+
+        user:
+            data.user
+
+    });
+
+}
+
+
+async function refreshSession() {
+
+    if (
+        !session?.refresh_token
+    ) {
+
+        throw new Error(
+            'انتهت جلسة الدخول'
+        );
+
+    }
+
+
+    const data =
+        await authRequest(
+            'token?grant_type=refresh_token',
+            {
+                refresh_token:
+                    session.refresh_token
+            }
+        );
+
+
+    saveSession({
+
+        access_token:
+            data.access_token,
+
+        refresh_token:
+            data.refresh_token ||
+            session.refresh_token,
+
+        expires_at:
+            Math.floor(
+                Date.now() / 1000
+            ) +
+            Number(
+                data.expires_in ||
+                3600
+            ),
+
+        user:
+            data.user ||
+            session.user
+
+    });
+
+}
+
+
+async function getToken() {
+
+    if (
+        expiresSoon()
+    ) {
+
+        await refreshSession();
+
+    }
+
+
+    return (
+        session.access_token
+    );
+
+}
+
+
+
+async function rootApiRead(
+    path
+) {
+
+    const token =
+        await getToken();
+
+
+    const response =
+        await fetch(
+            `${SUPABASE_URL}/rest/v1/${path}`,
+            {
+                headers: {
+
+                    apikey:
+                        SUPABASE_ANON_KEY,
+
+                    Authorization:
+                        `Bearer ${token}`,
+
+                    Accept:
+                        'application/json'
+
+                },
+
+                cache:
+                    'no-store'
+            }
+        );
+
+
+    const data =
+        await response
+            .json()
+            .catch(
+                () => []
+            );
+
+
+    if (
+        !response.ok
+    ) {
+
+        throw new Error(
+            data?.message ||
+            data?.error ||
+            `API ${response.status}`
+        );
+
+    }
+
+
+    return data;
+
+}
+
+
+async function resolveCurrentClient() {
+
+    if (
+        !session?.user?.id
+    ) {
+
+        throw new Error(
+            'لم يتم العثور على المستخدم.'
+        );
+
+    }
+
+
+    const memberships =
+        await rootApiRead(
+            `client_members` +
+            `?user_id=eq.${encodeURIComponent(session.user.id)}` +
+            `&select=client_id,role` +
+            `&limit=1`
+        );
+
+
+    if (
+        !Array.isArray(
+            memberships
+        ) ||
+        !memberships.length
+    ) {
+
+        throw new Error(
+            'هذا الحساب غير مربوط بعميل مفعل.'
+        );
+
+    }
+
+
+    const membership =
+        memberships[0];
+
+
+    const clients =
+        await rootApiRead(
+            `clients` +
+            `?id=eq.${encodeURIComponent(membership.client_id)}` +
+            `&active=eq.true` +
+            `&select=id,slug,display_name,active` +
+            `&limit=1`
+        );
+
+
+    if (
+        !Array.isArray(
+            clients
+        ) ||
+        !clients.length
+    ) {
+
+        throw new Error(
+            'حساب العميل غير مفعل.'
+        );
+
+    }
+
+
+    currentClient = {
+
+        ...clients[0],
+
+        role:
+            membership.role
+
+    };
+
+
+    TENANT_ROOT =
+        `clients/${currentClient.slug}`;
+
+
+    PORTFOLIO_ROOT =
+        `${TENANT_ROOT}/portfolio`;
+
+
+    PRICING_ROOT =
+        `${TENANT_ROOT}/pricing`;
+
+
+    LOGO_PATH =
+        `${TENANT_ROOT}/General photos/H EL M.png`;
+
+
+    ABOUT_PATH =
+        `${TENANT_ROOT}/General photos/abute us.png`;
+
+
+    SITE_CONFIG_PATH =
+        `${TENANT_ROOT}/config/site.json`;
+
+
+    const brand =
+        document.querySelector(
+            '.brand'
+        );
+
+
+    if (
+        brand
+    ) {
+
+        brand.textContent =
+            `${currentClient.display_name} — إدارة الموقع`;
+
+    }
+
+
+    const publicSiteButton =
+        document.querySelector(
+            '.top-actions a[href="index.html"]'
+        );
+
+
+    if (
+        publicSiteButton
+    ) {
+
+        publicSiteButton.href =
+            `site/?site=${encodeURIComponent(currentClient.slug)}`;
+
+    }
+
+
+    document.title =
+        `${currentClient.display_name} — إدارة الموقع`;
+
+}
+
+async function storageHeaders(
+    json = false
+) {
+
+    const accessToken =
+        await getToken();
+
+
+    return {
+
+        apikey:
+            SUPABASE_ANON_KEY,
+
+        Authorization:
+            `Bearer ${accessToken}`,
+
+        ...(json
+            ? {
+                'Content-Type':
+                    'application/json'
+            }
+            : {})
+
+    };
+
+}
+
+
+async function listStorage(
+    prefix = ''
+) {
+
+    const response =
+        await fetch(
+            `${SUPABASE_URL}/storage/v1/object/list/${BUCKET}`,
+            {
+                method: 'POST',
+
+                headers:
+                    await storageHeaders(
+                        true
+                    ),
+
+                body:
+                    JSON.stringify({
+
+                        prefix,
+
+                        limit: 1000,
+
+                        offset: 0,
+
+                        sortBy: {
+                            column:
+                                'name',
+
+                            order:
+                                'asc'
+                        }
+
+                    })
+            }
+        );
+
+
+    if (
+        !response.ok
+    ) {
+
+        throw new Error(
+            `List ${response.status}: ${await response.text()}`
+        );
+
+    }
+
+
+    const data =
+        await response.json();
+
+
+    return (
+        Array.isArray(
+            data
+        )
+            ? data
+            : []
+    );
+
+}
+
+
+async function listAll(
+    prefix = ''
+) {
+
+    const result =
+        [];
+
+
+    const items =
+        await listStorage(
+            prefix
+        );
+
+
+    for (
+        const item of items
+    ) {
+
+        const path =
+            prefix
+                ? `${prefix}/${item.name}`
+                : item.name;
+
+
+        if (
+            isFolder(
+                item
+            )
+        ) {
+
+            result.push(
+                ...await listAll(
+                    path
+                )
+            );
+
+        }
+
+        else {
+
+            result.push({
+                ...item,
+                path
+            });
+
+        }
+
+    }
+
+
+    return result;
+
+}
+
+
+async function uploadFile(
+    path,
+    file
+) {
+
+    const headers =
+        await storageHeaders(
+            false
+        );
+
+
+    headers['Content-Type'] =
+        file.type ||
+        'application/octet-stream';
+
+    headers['x-upsert'] =
+        'true';
+
+    headers['cache-control'] =
+        '0';
+
+
+    const response =
+        await fetch(
+            `${SUPABASE_URL}/storage/v1/object/${BUCKET}/${encodePath(path)}`,
+            {
+                method:
+                    'POST',
+
+                headers,
+
+                body:
+                    file
+            }
+        );
+
+
+    if (
+        !response.ok
+    ) {
+
+        throw new Error(
+            `Upload ${response.status}: ${await response.text()}`
+        );
+
+    }
+
+
+    return response
+        .json()
+        .catch(
+            () => ({})
+        );
+
+}
+
+
+async function removePaths(
+    paths
+) {
+
+    if (
+        !paths.length
+    ) {
+        return;
+    }
+
+
+    const response =
+        await fetch(
+            `${SUPABASE_URL}/storage/v1/object/${BUCKET}`,
+            {
+                method:
+                    'DELETE',
+
+                headers:
+                    await storageHeaders(
+                        true
+                    ),
+
+                body:
+                    JSON.stringify({
+                        prefixes:
+                            paths
+                    })
+            }
+        );
+
+
+    if (
+        !response.ok
+    ) {
+
+        throw new Error(
+            `Delete ${response.status}: ${await response.text()}`
+        );
+
+    }
+
+}
+
+
+
+/* ============================================================
+   ROOT CMS DATA V8
+   ============================================================ */
+
+const DEFAULT_SITE_CONFIG = {
+
+    brandName:
+        'ROOT dent',
+
+    browserTitle:
+        'ROOT dent',
+
+    navProducts:
+        'منتجاتنا',
+
+    navAbout:
+        'شعارنا',
+
+    navPricing:
+        'قائمة الأسعار',
+
+    facebookLabel:
+        'فيسبوك',
+
+    facebookUrl:
+        'https://www.facebook.com/profile.php?id=61593184389536',
+
+    whatsappLabel:
+        'واتساب',
+
+    whatsappNumber:
+        '201040296832',
+
+    phoneLabel:
+        '01040296832',
+
+    phoneNumber:
+        '+201040296832'
+
+};
+
+
+let siteConfig = {
+    ...DEFAULT_SITE_CONFIG
+};
+
+
+async function loadSiteConfig() {
+
+    try {
+
+        const response =
+            await fetch(
+                publicUrl(
+                    SITE_CONFIG_PATH
+                ),
+                {
+                    cache:
+                        'no-store'
+                }
+            );
+
+
+        if (
+            response.ok
+        ) {
+
+            const data =
+                await response.json();
+
+
+            siteConfig = {
+                ...DEFAULT_SITE_CONFIG,
+                ...data
+            };
+
+        }
+
+        else {
+
+            siteConfig = {
+                ...DEFAULT_SITE_CONFIG
+            };
+
+        }
+
+    }
+
+    catch {
+
+        siteConfig = {
+            ...DEFAULT_SITE_CONFIG
+        };
+
+    }
+
+
+    fillSiteConfigForm();
+
+}
+
+
+function fillSiteConfigForm() {
+
+    const mapping = {
+
+        siteBrandName:
+            'brandName',
+
+        siteBrowserTitle:
+            'browserTitle',
+
+        siteNavProducts:
+            'navProducts',
+
+        siteNavAbout:
+            'navAbout',
+
+        siteNavPricing:
+            'navPricing',
+
+        siteFacebookLabel:
+            'facebookLabel',
+
+        siteFacebookUrl:
+            'facebookUrl',
+
+        siteWhatsappLabel:
+            'whatsappLabel',
+
+        siteWhatsappNumber:
+            'whatsappNumber',
+
+        sitePhoneLabel:
+            'phoneLabel',
+
+        sitePhoneNumber:
+            'phoneNumber'
+
+    };
+
+
+    Object.entries(
+        mapping
+    )
+    .forEach(
+        ([id, key]) => {
+
+            const input =
+                $(id);
+
+
+            if (
+                input
+            ) {
+
+                input.value =
+                    siteConfig[key] ??
+                    '';
+
+            }
+
+        }
+    );
+
+}
+
+
+async function saveSiteConfigFromForm() {
+
+    const next = {
+
+        brandName:
+            $('siteBrandName')
+                .value
+                .trim(),
+
+        browserTitle:
+            $('siteBrowserTitle')
+                .value
+                .trim(),
+
+        navProducts:
+            $('siteNavProducts')
+                .value
+                .trim(),
+
+        navAbout:
+            $('siteNavAbout')
+                .value
+                .trim(),
+
+        navPricing:
+            $('siteNavPricing')
+                .value
+                .trim(),
+
+        facebookLabel:
+            $('siteFacebookLabel')
+                .value
+                .trim(),
+
+        facebookUrl:
+            $('siteFacebookUrl')
+                .value
+                .trim(),
+
+        whatsappLabel:
+            $('siteWhatsappLabel')
+                .value
+                .trim(),
+
+        whatsappNumber:
+            $('siteWhatsappNumber')
+                .value
+                .trim(),
+
+        phoneLabel:
+            $('sitePhoneLabel')
+                .value
+                .trim(),
+
+        phoneNumber:
+            $('sitePhoneNumber')
+                .value
+                .trim()
+
+    };
+
+
+    const json =
+        JSON.stringify(
+            next,
+            null,
+            2
+        );
+
+
+    const blob =
+        new Blob(
+            [json],
+            {
+                type:
+                    'application/json'
+            }
+        );
+
+
+    await uploadFile(
+        SITE_CONFIG_PATH,
+        blob
+    );
+
+
+    siteConfig =
+        next;
+
+}
+
+
+/*
+ * Copy an existing public Storage object safely.
+ * The OLD object remains untouched until the new copy succeeds.
+ */
+
+async function moveStorageObject(
+    sourcePath,
+    destinationPath
+) {
+
+    const response =
+        await fetch(
+            `${SUPABASE_URL}/storage/v1/object/move`,
+            {
+                method:
+                    'POST',
+
+                headers:
+                    await storageHeaders(
+                        true
+                    ),
+
+                body:
+                    JSON.stringify({
+
+                        bucketId:
+                            BUCKET,
+
+                        sourceKey:
+                            sourcePath,
+
+                        destinationKey:
+                            destinationPath
+
+                    })
+            }
+        );
+
+
+    if (
+        !response.ok
+    ) {
+
+        throw new Error(
+            `Move ${response.status}: ${await response.text()}`
+        );
+
+    }
+
+}
+
+
+async function renameCurrentProject() {
+
+    if (
+        !currentProject
+    ) {
+        return;
+    }
+
+
+    const oldProject =
+        currentProject;
+
+
+    const oldName =
+        oldProject.name;
+
+
+    const oldPath =
+        oldProject.path;
+
+
+    const newName =
+        safeSegment(
+            $('renameProjectInput')
+                .value
+        );
+
+
+    if (
+        !newName
+    ) {
+
+        alert(
+            'اكتب اسم المشروع الجديد'
+        );
+
+        return;
+
+    }
+
+
+    if (
+        newName.toLowerCase() ===
+        oldName.toLowerCase()
+    ) {
+
+        setStatus(
+            'اسم المشروع لم يتغير.'
+        );
+
+        return;
+
+    }
+
+
+    const duplicate =
+        projects.some(
+            project =>
+                project.path !==
+                    oldPath
+                &&
+                project.name
+                    .toLowerCase() ===
+                    newName
+                    .toLowerCase()
+        );
+
+
+    if (
+        duplicate
+    ) {
+
+        alert(
+            'يوجد مشروع آخر بنفس الاسم.'
+        );
+
+        return;
+
+    }
+
+
+    if (
+        !confirm(
+            `تغيير اسم المشروع من "${oldName}" إلى "${newName}"؟`
+        )
+    ) {
+        return;
+    }
+
+
+    const newPath =
+        `${PORTFOLIO_ROOT}/${newName}`;
+
+
+    const movedFiles =
+        [];
+
+
+    try {
+
+        setStatus(
+            'جاري تغيير اسم المشروع...'
+        );
+
+
+        const files =
+            await listAll(
+                oldPath
+            );
+
+
+        if (
+            !files.length
+        ) {
+
+            throw new Error(
+                'لم يتم العثور على ملفات داخل المشروع.'
+            );
+
+        }
+
+
+        /*
+         * نتأكد أن المسار الجديد فارغ
+         * قبل ما نبدأ النقل.
+         */
+        const destinationFiles =
+            await listAll(
+                newPath
+            )
+            .catch(
+                () => []
+            );
+
+
+        if (
+            destinationFiles.length
+        ) {
+
+            throw new Error(
+                'يوجد بالفعل مشروع أو ملفات بالاسم الجديد.'
+            );
+
+        }
+
+
+        /*
+         * MOVE حقيقي:
+         * الملف ينتقل للمسار الجديد
+         * والأصل يختفي تلقائيًا.
+         */
+        for (
+            const item of files
+        ) {
+
+            const relativePath =
+                item.path.slice(
+                    oldPath.length + 1
+                );
+
+
+            const destinationPath =
+                `${newPath}/${relativePath}`;
+
+
+            await moveStorageObject(
+                item.path,
+                destinationPath
+            );
+
+
+            movedFiles.push({
+
+                from:
+                    item.path,
+
+                to:
+                    destinationPath
+
+            });
+
+        }
+
+
+        await loadProjects();
+
+
+        currentProject =
+            projects.find(
+                project =>
+                    project.path ===
+                    newPath
+            );
+
+
+        if (
+            !currentProject
+        ) {
+
+            throw new Error(
+                'تم النقل ولكن تعذر إعادة تحميل المشروع.'
+            );
+
+        }
+
+
+        $('modalProjectName').textContent =
+            currentProject.name;
+
+
+        $('renameProjectInput').value =
+            currentProject.name;
+
+
+        $('modalCover').src =
+            publicUrl(
+                currentProject.coverPath
+            );
+
+
+        renderMedia();
+
+
+        setStatus(
+            `تم تغيير الاسم إلى "${newName}" بنجاح.`
+        );
+
+    }
+
+    catch (error) {
+
+        /*
+         * لو حصل خطأ أثناء النقل،
+         * نحاول نرجع أي ملفات اتحركت
+         * لمكانها الأصلي.
+         */
+        if (
+            movedFiles.length
+        ) {
+
+            setStatus(
+                'حدث خطأ أثناء تغيير الاسم، جاري استرجاع الملفات...',
+                true
+            );
+
+
+            for (
+                const item of
+                [...movedFiles].reverse()
+            ) {
+
+                await moveStorageObject(
+                    item.to,
+                    item.from
+                )
+                .catch(
+                    () => {}
+                );
+
+            }
+
+        }
+
+
+        await loadProjects()
+            .catch(
+                () => {}
+            );
+
+
+        currentProject =
+            projects.find(
+                project =>
+                    project.path ===
+                    oldPath
+            )
+            ||
+            projects.find(
+                project =>
+                    project.path ===
+                    newPath
+            )
+            ||
+            null;
+
+
+        if (
+            currentProject
+        ) {
+
+            $('modalProjectName').textContent =
+                currentProject.name;
+
+
+            $('renameProjectInput').value =
+                currentProject.name;
+
+
+            $('modalCover').src =
+                publicUrl(
+                    currentProject.coverPath
+                );
+
+
+            renderMedia();
+
+        }
+
+
+        throw error;
+
+    }
+
+}
+
+/* ROOT CMS DATA V8 END */
+
+
+
+/* ============================================================
+   ROOT MEDIA CAPTIONS ADMIN V11
+   ============================================================ */
+
+const PROJECT_MEDIA_TEXTS_FILE =
+    'media-texts.json';
+
+
+function defaultMediaCaption(
+    name
+) {
+
+    return String(
+        name || ''
+    )
+    .replace(
+        /\.[^/.]+$/,
+        ''
+    )
+    .replace(
+        /[-_]+/g,
+        ' '
+    )
+    .replace(
+        /\s+/g,
+        ' '
+    )
+    .trim();
+
+}
+
+
+function projectMediaTextsPath(
+    projectPath
+) {
+
+    return (
+        `${projectPath}/` +
+        PROJECT_MEDIA_TEXTS_FILE
+    );
+
+}
+
+
+async function loadProjectMediaTexts(
+    projectPath
+) {
+
+    try {
+
+        const response =
+            await fetch(
+                publicUrl(
+                    projectMediaTextsPath(
+                        projectPath
+                    )
+                ),
+                {
+                    cache:
+                        'no-store'
+                }
+            );
+
+
+        if (
+            !response.ok
+        ) {
+
+            return {};
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        if (
+            !data ||
+            typeof data !==
+                'object' ||
+            Array.isArray(
+                data
+            )
+        ) {
+
+            return {};
+
+        }
+
+
+        return data;
+
+    }
+
+    catch {
+
+        return {};
+
+    }
+
+}
+
+
+async function saveProjectMediaTexts(
+    projectPath,
+    mediaTexts
+) {
+
+    const json =
+        JSON.stringify(
+            mediaTexts || {},
+            null,
+            2
+        );
+
+
+    const blob =
+        new Blob(
+            [json],
+            {
+                type:
+                    'application/json'
+            }
+        );
+
+
+    await uploadFile(
+        projectMediaTextsPath(
+            projectPath
+        ),
+        blob
+    );
+
+}
+
+
+async function saveMediaCaption(
+    index
+) {
+
+    if (
+        !currentProject
+    ) {
+        return;
+    }
+
+
+    const item =
+        currentProject.media[
+            index
+        ];
+
+
+    if (
+        !item
+    ) {
+        return;
+    }
+
+
+    const input =
+        document.querySelector(
+            `[data-caption-input="${index}"]`
+        );
+
+
+    if (
+        !input
+    ) {
+        return;
+    }
+
+
+    const value =
+        input.value.trim();
+
+
+    const next =
+        {
+            ...(
+                currentProject.mediaTexts ||
+                {}
+            )
+        };
+
+
+    if (
+        value
+    ) {
+
+        next[
+            item.name
+        ] =
+            value;
+
+    }
+
+    else {
+
+        delete next[
+            item.name
+        ];
+
+    }
+
+
+    setStatus(
+        'جاري حفظ نص الصورة...'
+    );
+
+
+    await saveProjectMediaTexts(
+        currentProject.path,
+        next
+    );
+
+
+    currentProject.mediaTexts =
+        next;
+
+
+    setStatus(
+        value
+            ? 'تم حفظ نص الصورة.'
+            : 'تم حذف النص المخصص وسيتم استخدام اسم الملف.'
+    );
+
+}
+
+/* ROOT MEDIA CAPTIONS ADMIN V11 END */
+
+async function loadProjects() {
+
+    const rootItems =
+        await listStorage(
+            PORTFOLIO_ROOT
+        );
+
+
+    const folders =
+        rootItems.filter(
+            isFolder
+        );
+
+
+    projects =
+        await Promise.all(
+
+            folders.map(
+
+                async folder => {
+
+                    const path =
+                        `${PORTFOLIO_ROOT}/${folder.name}`;
+
+
+                    let media =
+                        [];
+
+
+                    try {
+
+                        media =
+                            (
+                                await listStorage(
+                                    `${path}/media`
+                                )
+                            )
+                            .filter(
+                                item =>
+                                    !isFolder(
+                                        item
+                                    )
+                            )
+                            .map(
+                                item => ({
+                                    name:
+                                        item.name,
+
+                                    path:
+                                        `${path}/media/${item.name}`
+                                })
+                            );
+
+                    }
+
+                    catch {
+                        media = [];
+                    }
+
+
+                    /* ROOT MEDIA TEXTS LOAD V11 */
+
+                    const mediaTexts =
+                        await loadProjectMediaTexts(
+                            path
+                        );
+
+                    return {
+
+                        name:
+                            folder.name,
+
+                        path,
+
+                        coverPath:
+                            `${path}/cover/cover.png`,
+
+                        media,
+
+                        mediaTexts
+
+                    };
+
+                }
+
+            )
+
+        );
+
+
+    projects.sort(
+        (
+            a,
+            b
+        ) =>
+            a.name.localeCompare(
+                b.name,
+                undefined,
+                {
+                    numeric: true,
+                    sensitivity: 'base'
+                }
+            )
+    );
+
+
+    renderProjects();
+
+}
+
+
+async function loadPricing() {
+
+    pricing =
+        (
+            await listAll(
+                PRICING_ROOT
+            )
+        )
+        .filter(
+            item =>
+                isImage(
+                    item.name
+                )
+        );
+
+
+    pricing.sort(
+        (
+            a,
+            b
+        ) =>
+            a.path.localeCompare(
+                b.path,
+                undefined,
+                {
+                    numeric: true,
+                    sensitivity: 'base'
+                }
+            )
+    );
+
+
+    renderPricing();
+
+}
+
+
+function renderProjects() {
+
+    const grid =
+        $('projectsGrid');
+
+
+    $('projectCount').textContent =
+        `${projects.length} مشروع`;
+
+
+    if (
+        !projects.length
+    ) {
+
+        grid.innerHTML =
+            '<div class="empty">لا توجد مشاريع</div>';
+
+        return;
+
+    }
+
+
+    grid.innerHTML =
+        projects
+        .map(
+            (
+                project,
+                index
+            ) => `
+
+            <article class="project-card">
+
+                <img
+                    class="project-cover"
+                    src="${publicUrl(project.coverPath)}"
+                    onerror="this.style.opacity=.25"
+                >
+
+                <div class="card-body">
+
+                    <div class="card-title">
+                        ${escapeHtml(project.name)}
+                    </div>
+
+                    <div class="card-actions">
+
+                        <button
+                            class="btn small"
+                            data-manage="${index}"
+                            type="button"
+                        >
+
+                            <i class="fa-solid fa-gear"></i>
+
+                            إدارة
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+        `)
+        .join('');
+
+
+    grid
+        .querySelectorAll(
+            '[data-manage]'
+        )
+        .forEach(
+            button => {
+
+                button.onclick =
+                    () =>
+                        openProject(
+                            Number(
+                                button.dataset.manage
+                            )
+                        );
+
+            }
+        );
+
+}
+
+
+function renderPricing() {
+
+    const grid =
+        $('pricingGrid');
+
+
+    if (
+        !pricing.length
+    ) {
+
+        grid.innerHTML =
+            '<div class="empty">لا توجد صفحات أسعار</div>';
+
+        return;
+
+    }
+
+
+    grid.innerHTML =
+        pricing
+        .map(
+            (
+                item,
+                index
+            ) => `
+
+            <article class="media-card">
+
+                <img
+                    class="media-preview"
+                    src="${publicUrl(item.path)}"
+                >
+
+                <div
+                    class="media-name"
+                    title="${escapeHtml(item.path)}"
+                >
+                    ${escapeHtml(item.name)}
+                </div>
+
+                <div class="media-actions">
+
+                    <button
+                        class="btn small secondary"
+                        data-preplace="${index}"
+                        type="button"
+                    >
+                        استبدال
+                    </button>
+
+                    <button
+                        class="btn small danger"
+                        data-pdelete="${index}"
+                        type="button"
+                    >
+                        حذف
+                    </button>
+
+                </div>
+
+            </article>
+
+        `)
+        .join('');
+
+
+    grid
+        .querySelectorAll(
+            '[data-preplace]'
+        )
+        .forEach(
+            button => {
+
+                button.onclick =
+                    () =>
+                        chooseReplacement(
+                            'pricing',
+                            pricing[
+                                Number(
+                                    button.dataset.preplace
+                                )
+                            ]
+                        );
+
+            }
+        );
+
+
+    grid
+        .querySelectorAll(
+            '[data-pdelete]'
+        )
+        .forEach(
+            button => {
+
+                button.onclick =
+                    () =>
+                        deletePricing(
+                            Number(
+                                button.dataset.pdelete
+                            )
+                        );
+
+            }
+        );
+
+}
+
+
+function openProject(
+    index
+) {
+
+    currentProject =
+        projects[index];
+
+
+    $('modalProjectName').textContent =
+        currentProject.name;
+
+
+    /* ROOT PROJECT RENAME OPEN V8 */
+    $('renameProjectInput').value =
+        currentProject.name;
+
+
+    $('modalCover').src =
+        publicUrl(
+            currentProject.coverPath
+        );
+
+
+    renderMedia();
+
+
+    $('projectModal')
+        .classList
+        .remove(
+            'hidden'
+        );
+
+}
+
+
+function closeProject() {
+
+    $('projectModal')
+        .classList
+        .add(
+            'hidden'
+        );
+
+
+    currentProject =
+        null;
+
+}
+
+
+
+/* ============================================================
+   ROOT CAPTION UI FIX V12 FUNCTIONS
+   ============================================================ */
+
+function rootCaptionDefault(
+    name
+) {
+
+    return String(
+        name || ''
+    )
+    .replace(
+        /\.[^/.]+$/,
+        ''
+    )
+    .replace(
+        /[-_]+/g,
+        ' '
+    )
+    .replace(
+        /\s+/g,
+        ' '
+    )
+    .trim();
+
+}
+
+
+function rootCaptionPath(
+    projectPath
+) {
+
+    return (
+        `${projectPath}/media-texts.json`
+    );
+
+}
+
+
+async function rootLoadMediaTexts(
+    projectPath
+) {
+
+    try {
+
+        const response =
+            await fetch(
+                publicUrl(
+                    rootCaptionPath(
+                        projectPath
+                    )
+                ),
+                {
+                    cache:
+                        'no-store'
+                }
+            );
+
+
+        if (
+            !response.ok
+        ) {
+
+            return {};
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        return (
+            data &&
+            typeof data ===
+                'object' &&
+            !Array.isArray(
+                data
+            )
+        )
+            ? data
+            : {};
+
+    }
+
+    catch {
+
+        return {};
+
+    }
+
+}
+
+
+async function rootWriteMediaTexts(
+    projectPath,
+    values
+) {
+
+    const blob =
+        new Blob(
+            [
+                JSON.stringify(
+                    values || {},
+                    null,
+                    2
+                )
+            ],
+            {
+                type:
+                    'application/json'
+            }
+        );
+
+
+    await uploadFile(
+        rootCaptionPath(
+            projectPath
+        ),
+        blob
+    );
+
+}
+
+
+async function rootSaveCaption(
+    index
+) {
+
+    if (
+        !currentProject
+    ) {
+
+        return;
+
+    }
+
+
+    const item =
+        currentProject.media[
+            index
+        ];
+
+
+    if (
+        !item
+    ) {
+
+        return;
+
+    }
+
+
+    const input =
+        document.querySelector(
+            `[data-root-caption-input="${index}"]`
+        );
+
+
+    if (
+        !input
+    ) {
+
+        return;
+
+    }
+
+
+    /*
+     * Always load the latest map first,
+     * so saving one caption never removes the others.
+     */
+    const texts =
+        await rootLoadMediaTexts(
+            currentProject.path
+        );
+
+
+    const value =
+        input.value.trim();
+
+
+    if (
+        value
+    ) {
+
+        texts[
+            item.name
+        ] =
+            value;
+
+    }
+
+    else {
+
+        delete texts[
+            item.name
+        ];
+
+    }
+
+
+    await rootWriteMediaTexts(
+        currentProject.path,
+        texts
+    );
+
+
+    currentProject.mediaTexts =
+        texts;
+
+
+    setStatus(
+        value
+            ? 'تم حفظ النص بنجاح.'
+            : 'تم حذف النص المخصص.'
+    );
+
+}
+
+
+async function rootHydrateMediaTexts(
+    project
+) {
+
+    if (
+        !project
+    ) {
+        return;
+    }
+
+
+    const projectPath =
+        project.path;
+
+
+    const texts =
+        await rootLoadMediaTexts(
+            projectPath
+        );
+
+
+    if (
+        !currentProject ||
+        currentProject.path !==
+            projectPath
+    ) {
+
+        return;
+
+    }
+
+
+    currentProject.mediaTexts =
+        texts;
+
+
+    currentProject.media
+    .forEach(
+        (
+            item,
+            index
+        ) => {
+
+            const input =
+                document.querySelector(
+                    `[data-root-caption-input="${index}"]`
+                );
+
+
+            if (
+                input
+            ) {
+
+                input.value =
+                    texts[
+                        item.name
+                    ] || '';
+
+            }
+
+        }
+    );
+
+}
+
+/* ROOT CAPTION UI FIX V12 FUNCTIONS END */
+
+
+function renderMedia() {
+
+    const grid =
+        $('mediaGrid');
+
+
+    const media =
+        currentProject?.media ||
+        [];
+
+
+    if (
+        !media.length
+    ) {
+
+        grid.innerHTML =
+            '<div class="empty">لا توجد ملفات داخل المشروع</div>';
+
+        return;
+
+    }
+
+
+    grid.innerHTML =
+        media
+        .map(
+            (
+                item,
+                index
+            ) => `
+
+            <article class="media-card">
+
+                ${
+                    isImage(
+                        item.name
+                    )
+
+                    ? `
+                        <img
+                            class="media-preview"
+                            src="${publicUrl(item.path)}"
+                        >
+                    `
+
+                    : isVideo(
+                        item.name
+                    )
+
+                    ? `
+                        <div class="file-icon">
+                            <i class="fa-solid fa-video"></i>
+                        </div>
+                    `
+
+                    : `
+                        <div class="file-icon">
+                            <i class="fa-solid fa-file"></i>
+                        </div>
+                    `
+                }
+
+
+                <div
+                    class="media-name"
+                    title="${escapeHtml(item.name)}"
+                >
+                    ${escapeHtml(item.name)}
+                </div>
+
+
+                <div class="root-caption-editor">
+
+                    <label>
+                        النص الظاهر
+                    </label>
+
+                    <input
+                        class="input"
+                        type="text"
+                        data-root-caption-input="${index}"
+                        value="${escapeHtml(
+                            currentProject?.mediaTexts?.[item.name] || ''
+                        )}"
+                        placeholder="${escapeHtml(
+                            rootCaptionDefault(
+                                item.name
+                            )
+                        )}"
+                    >
+
+                    <button
+                        class="btn small root-caption-save"
+                        data-root-caption-save="${index}"
+                        type="button"
+                    >
+
+                        <i class="fa-solid fa-floppy-disk"></i>
+
+                        حفظ النص
+
+                    </button>
+
+                </div>
+
+
+                <div class="media-actions">
+
+                    <button
+                        class="btn small secondary"
+                        data-mreplace="${index}"
+                        type="button"
+                    >
+                        استبدال
+                    </button>
+
+                    <button
+                        class="btn small danger"
+                        data-mdelete="${index}"
+                        type="button"
+                    >
+                        حذف
+                    </button>
+
+                </div>
+
+            </article>
+
+        `)
+        .join('');
+
+
+    grid
+        .querySelectorAll(
+            '[data-mreplace]'
+        )
+        .forEach(
+            button => {
+
+                button.onclick =
+                    () =>
+                        chooseReplacement(
+                            'media',
+                            media[
+                                Number(
+                                    button.dataset.mreplace
+                                )
+                            ]
+                        );
+
+            }
+        );
+
+
+    grid
+        .querySelectorAll(
+            '[data-mdelete]'
+        )
+        .forEach(
+            button => {
+
+                button.onclick =
+                    () =>
+                        deleteMedia(
+                            Number(
+                                button.dataset.mdelete
+                            )
+                        );
+
+            }
+        );
+
+
+    grid
+        .querySelectorAll(
+            '[data-root-caption-save]'
+        )
+        .forEach(
+            button => {
+
+                button.onclick =
+                    async () => {
+
+                        const index =
+                            Number(
+                                button.dataset
+                                    .rootCaptionSave
+                            );
+
+
+                        try {
+
+                            button.disabled =
+                                true;
+
+
+                            button.innerHTML =
+                                '<span class="spinner"></span> حفظ';
+
+
+                            await rootSaveCaption(
+                                index
+                            );
+
+                        }
+
+                        catch (error) {
+
+                            setStatus(
+                                error.message,
+                                true
+                            );
+
+                        }
+
+                        finally {
+
+                            button.disabled =
+                                false;
+
+
+                            button.innerHTML =
+                                '<i class="fa-solid fa-floppy-disk"></i> حفظ النص';
+
+                        }
+
+                    };
+
+            }
+        );
+
+
+    rootHydrateMediaTexts(
+        currentProject
+    )
+    .catch(
+        error =>
+            console.error(
+                'Caption load failed:',
+                error
+            )
+    );
+
+}
+
+
+function chooseReplacement(
+    kind,
+    item
+) {
+
+    pendingReplace = {
+        kind,
+        item
+    };
+
+
+    const picker =
+        $('replacePicker');
+
+
+    if (
+        kind ===
+        'pricing'
+    ) {
+
+        picker.accept =
+            'image/*';
+
+    }
+
+    else if (
+        isImage(
+            item.name
+        )
+    ) {
+
+        picker.accept =
+            'image/*';
+
+    }
+
+    else if (
+        isVideo(
+            item.name
+        )
+    ) {
+
+        picker.accept =
+            'video/*';
+
+    }
+
+    else {
+
+        picker.accept =
+            '.pdf';
+
+    }
+
+
+    picker.value =
+        '';
+
+
+    picker.click();
+
+}
+
+
+async function deletePricing(
+    index
+) {
+
+    const item =
+        pricing[index];
+
+
+    if (
+        !confirm(
+            `حذف ${item.name}؟`
+        )
+    ) {
+        return;
+    }
+
+
+    try {
+
+        setStatus(
+            'جاري حذف صفحة الأسعار...'
+        );
+
+
+        await removePaths([
+            item.path
+        ]);
+
+
+        await loadPricing();
+
+
+        setStatus(
+            'تم حذف صفحة الأسعار.'
+        );
+
+    }
+
+    catch (error) {
+
+        setStatus(
+            error.message,
+            true
+        );
+
+    }
+
+}
+
+
+async function deleteMedia(
+    index
+) {
+
+    const item =
+        currentProject.media[
+            index
+        ];
+
+
+    if (
+        !confirm(
+            `حذف ${item.name}؟`
+        )
+    ) {
+        return;
+    }
+
+
+    try {
+
+        setStatus(
+            'جاري حذف الملف...'
+        );
+
+
+        const projectPath =
+            currentProject.path;
+
+
+        await removePaths([
+            item.path
+        ]);
+
+        /* ROOT MEDIA TEXT CLEANUP V11 */
+
+        if (
+            currentProject?.mediaTexts &&
+            Object.prototype.hasOwnProperty.call(
+                currentProject.mediaTexts,
+                item.name
+            )
+        ) {
+
+            const nextTexts = {
+                ...currentProject.mediaTexts
+            };
+
+
+            delete nextTexts[
+                item.name
+            ];
+
+
+            await saveProjectMediaTexts(
+                projectPath,
+                nextTexts
+            );
+
+
+            currentProject.mediaTexts =
+                nextTexts;
+
+        }
+
+
+
+        await loadProjects();
+
+
+        currentProject =
+            projects.find(
+                project =>
+                    project.path ===
+                    projectPath
+            );
+
+
+        renderMedia();
+
+
+        setStatus(
+            'تم حذف الملف.'
+        );
+
+    }
+
+    catch (error) {
+
+        setStatus(
+            error.message,
+            true
+        );
+
+    }
+
+}
+
+
+async function refreshAll() {
+
+    setStatus(
+        'جاري قراءة الموقع من Supabase...'
+    );
+
+
+    await Promise.all([
+        loadProjects(),
+        loadPricing(),
+        loadSiteConfig()
+    ]);
+
+
+    $('logoPreview').src =
+        publicUrl(
+            LOGO_PATH
+        );
+
+
+    $('aboutPreview').src =
+        publicUrl(
+            ABOUT_PATH
+        );
+
+
+    setStatus(
+        'تم تحديث البيانات.'
+    );
+
+}
+
+
+async function replaceFixed(
+    path,
+    inputId,
+    label
+) {
+
+    const file =
+        $(inputId)
+            .files?.[0];
+
+
+    if (
+        !file
+    ) {
+
+        alert(
+            'اختر ملفًا أولًا'
+        );
+
+        return;
+
+    }
+
+
+    try {
+
+        setStatus(
+            `جاري استبدال ${label}...`
+        );
+
+
+        await uploadFile(
+            path,
+            file
+        );
+
+
+        $(inputId).value =
+            '';
+
+
+        await refreshAll();
+
+
+        setStatus(
+            `تم استبدال ${label}.`
+        );
+
+    }
+
+    catch (error) {
+
+        setStatus(
+            error.message,
+            true
+        );
+
+    }
+
+}
+
+
+
+/* ROOT CMS EVENTS V8 */
+
+$('renameProjectBtn').onclick =
+    async () => {
+
+        try {
+
+            await renameCurrentProject();
+
+        }
+
+        catch (error) {
+
+            setStatus(
+                error.message,
+                true
+            );
+
+        }
+
+    };
+
+
+$('siteTextsForm')
+.addEventListener(
+    'submit',
+    async event => {
+
+        event.preventDefault();
+
+
+        const button =
+            $('saveSiteTextsBtn');
+
+
+        try {
+
+            button.disabled =
+                true;
+
+
+            button.innerHTML =
+                '<span class="spinner"></span> جاري الحفظ';
+
+
+            setStatus(
+                'جاري حفظ نصوص الموقع...'
+            );
+
+
+            await saveSiteConfigFromForm();
+
+
+            setStatus(
+                'تم حفظ نصوص الموقع بنجاح.'
+            );
+
+        }
+
+        catch (error) {
+
+            setStatus(
+                error.message,
+                true
+            );
+
+        }
+
+        finally {
+
+            button.disabled =
+                false;
+
+
+            button.innerHTML =
+                '<i class="fa-solid fa-floppy-disk"></i> حفظ نصوص الموقع';
+
+        }
+
+    }
+);
+
+/* ROOT CMS EVENTS V8 END */
+
+$('loginForm')
+.addEventListener(
+    'submit',
+    async event => {
+
+        event.preventDefault();
+
+
+        const button =
+            $('loginBtn');
+
+        const status =
+            $('loginStatus');
+
+
+        try {
+
+            button.disabled =
+                true;
+
+            button.innerHTML =
+                '<span class="spinner"></span> دخول';
+
+            status.textContent =
+                '';
+
+            status.classList.remove(
+                'err'
+            );
+
+
+            await login(
+                $('email')
+                    .value
+                    .trim(),
+
+                $('password')
+                    .value
+            );
+
+
+            await showDashboard();
+
+        }
+
+        catch (error) {
+
+            status.textContent =
+                error.message;
+
+            status.classList.add(
+                'err'
+            );
+
+        }
+
+        finally {
+
+            button.disabled =
+                false;
+
+            button.innerHTML =
+                '<i class="fa-solid fa-right-to-bracket"></i> دخول';
+
+        }
+
+    }
+);
+
+
+$('logoutBtn').onclick =
+    () => {
+
+        clearSession();
+
+        location.reload();
+
+    };
+
+
+$('refreshAllBtn').onclick =
+    () =>
+        refreshAll()
+        .catch(
+            error =>
+                setStatus(
+                    error.message,
+                    true
+                )
+        );
+
+
+$('logoReplaceBtn').onclick =
+    () =>
+        replaceFixed(
+            LOGO_PATH,
+            'logoFile',
+            'الشعار'
+        );
+
+
+$('aboutReplaceBtn').onclick =
+    () =>
+        replaceFixed(
+            ABOUT_PATH,
+            'aboutFile',
+            'صورة شعارنا'
+        );
+
+
+$('createProjectForm')
+.addEventListener(
+    'submit',
+    async event => {
+
+        event.preventDefault();
+
+
+        const name =
+            safeSegment(
+                $('newProjectName')
+                    .value
+            );
+
+
+        const cover =
+            $('newProjectCover')
+                .files?.[0];
+
+
+        if (
+            !name ||
+            !cover
+        ) {
+            return;
+        }
+
+
+        try {
+
+            setStatus(
+                'جاري إنشاء المشروع...'
+            );
+
+
+            if (
+                projects.some(
+                    project =>
+                        project.name
+                        .toLowerCase() ===
+                        name.toLowerCase()
+                )
+            ) {
+
+                throw new Error(
+                    'يوجد مشروع بنفس الاسم بالفعل'
+                );
+
+            }
+
+
+            await uploadFile(
+                `${PORTFOLIO_ROOT}/${name}/cover/cover.png`,
+                cover
+            );
+
+
+            event.target.reset();
+
+
+            await loadProjects();
+
+
+            setStatus(
+                'تم إنشاء المشروع.'
+            );
+
+        }
+
+        catch (error) {
+
+            setStatus(
+                error.message,
+                true
+            );
+
+        }
+
+    }
+);
+
+
+$('pricingAddBtn').onclick =
+    async () => {
+
+        const files =
+            [
+                ...(
+                    $('pricingFiles')
+                        .files || []
+                )
+            ];
+
+
+        if (
+            !files.length
+        ) {
+
+            alert(
+                'اختر صورة أو أكثر'
+            );
+
+            return;
+
+        }
+
+
+        try {
+
+            setStatus(
+                'جاري إضافة صفحات الأسعار...'
+            );
+
+
+            let highest =
+                0;
+
+
+            for (
+                const item of pricing
+            ) {
+
+                const match =
+                    String(
+                        item.name || ''
+                    )
+                    .match(
+                        /^(\d+)[-_ ]/
+                    );
+
+
+                if (
+                    match
+                ) {
+
+                    highest =
+                        Math.max(
+                            highest,
+                            Number(
+                                match[1]
+                            ) || 0
+                        );
+
+                }
+
+            }
+
+
+            let next =
+                highest + 1;
+
+
+            for (
+                const file of files
+            ) {
+
+                const prefix =
+                    String(
+                        next++
+                    )
+                    .padStart(
+                        3,
+                        '0'
+                    );
+
+
+                await uploadFile(
+                    `${PRICING_ROOT}/${prefix}-${safeFileName(file.name)}`,
+                    file
+                );
+
+            }
+
+
+            $('pricingFiles').value =
+                '';
+
+
+            await loadPricing();
+
+
+            setStatus(
+                'تمت إضافة صفحات الأسعار.'
+            );
+
+        }
+
+        catch (error) {
+
+            setStatus(
+                error.message,
+                true
+            );
+
+        }
+
+    };
+
+
+$('closeModalBtn').onclick =
+    closeProject;
+
+
+$('projectModal')
+.addEventListener(
+    'click',
+    event => {
+
+        if (
+            event.target ===
+            $('projectModal')
+        ) {
+
+            closeProject();
+
+        }
+
+    }
+);
+
+
+$('replaceCoverBtn').onclick =
+    async () => {
+
+        const file =
+            $('replaceCoverFile')
+                .files?.[0];
+
+
+        if (
+            !file ||
+            !currentProject
+        ) {
+
+            alert(
+                'اختر صورة غلاف'
+            );
+
+            return;
+
+        }
+
+
+        try {
+
+            setStatus(
+                'جاري استبدال الغلاف...'
+            );
+
+
+            const projectPath =
+                currentProject.path;
+
+
+            await uploadFile(
+                currentProject.coverPath,
+                file
+            );
+
+
+            $('replaceCoverFile').value =
+                '';
+
+
+            await loadProjects();
+
+
+            currentProject =
+                projects.find(
+                    project =>
+                        project.path ===
+                        projectPath
+                );
+
+
+            $('modalCover').src =
+                publicUrl(
+                    currentProject.coverPath
+                );
+
+
+            setStatus(
+                'تم استبدال الغلاف.'
+            );
+
+        }
+
+        catch (error) {
+
+            setStatus(
+                error.message,
+                true
+            );
+
+        }
+
+    };
+
+
+$('addMediaBtn').onclick =
+    async () => {
+
+        const files =
+            [
+                ...(
+                    $('addMediaFiles')
+                        .files || []
+                )
+            ];
+
+
+        if (
+            !currentProject ||
+            !files.length
+        ) {
+
+            alert(
+                'اختر ملفًا أو أكثر'
+            );
+
+            return;
+
+        }
+
+
+        try {
+
+            setStatus(
+                'جاري رفع ملفات المشروع...'
+            );
+
+
+            const existing =
+                new Set(
+                    currentProject.media
+                    .map(
+                        item =>
+                            item.name
+                            .toLowerCase()
+                    )
+                );
+
+
+            for (
+                const file of files
+            ) {
+
+                let name =
+                    safeFileName(
+                        file.name
+                    );
+
+
+                let base =
+                    name;
+
+                let extension =
+                    '';
+
+
+                const dot =
+                    name.lastIndexOf(
+                        '.'
+                    );
+
+
+                if (
+                    dot > 0
+                ) {
+
+                    base =
+                        name.slice(
+                            0,
+                            dot
+                        );
+
+                    extension =
+                        name.slice(
+                            dot
+                        );
+
+                }
+
+
+                let suffix =
+                    2;
+
+
+                while (
+                    existing.has(
+                        name.toLowerCase()
+                    )
+                ) {
+
+                    name =
+                        `${base}-${suffix++}${extension}`;
+
+                }
+
+
+                existing.add(
+                    name.toLowerCase()
+                );
+
+
+                await uploadFile(
+                    `${currentProject.path}/media/${name}`,
+                    file
+                );
+
+            }
+
+
+            $('addMediaFiles').value =
+                '';
+
+
+            const projectPath =
+                currentProject.path;
+
+
+            await loadProjects();
+
+
+            currentProject =
+                projects.find(
+                    project =>
+                        project.path ===
+                        projectPath
+                );
+
+
+            renderMedia();
+
+
+            setStatus(
+                'تمت إضافة الملفات.'
+            );
+
+        }
+
+        catch (error) {
+
+            setStatus(
+                error.message,
+                true
+            );
+
+        }
+
+    };
+
+
+$('deleteProjectBtn').onclick =
+    async () => {
+
+        if (
+            !currentProject
+        ) {
+            return;
+        }
+
+
+        if (
+            !confirm(
+                `سيتم حذف مشروع "${currentProject.name}" وكل ملفاته نهائيًا. متابعة؟`
+            )
+        ) {
+            return;
+        }
+
+
+        try {
+
+            setStatus(
+                'جاري حذف المشروع بالكامل...'
+            );
+
+
+            const files =
+                await listAll(
+                    currentProject.path
+                );
+
+
+            await removePaths(
+                files.map(
+                    item =>
+                        item.path
+                )
+            );
+
+
+            closeProject();
+
+
+            await loadProjects();
+
+
+            setStatus(
+                'تم حذف المشروع بالكامل.'
+            );
+
+        }
+
+        catch (error) {
+
+            setStatus(
+                error.message,
+                true
+            );
+
+        }
+
+    };
+
+
+$('replacePicker')
+.addEventListener(
+    'change',
+    async () => {
+
+        const file =
+            $('replacePicker')
+                .files?.[0];
+
+
+        if (
+            !file ||
+            !pendingReplace
+        ) {
+            return;
+        }
+
+
+        const task =
+            pendingReplace;
+
+
+        pendingReplace =
+            null;
+
+
+        try {
+
+            setStatus(
+                'جاري استبدال الملف...'
+            );
+
+
+            await uploadFile(
+                task.item.path,
+                file
+            );
+
+
+            if (
+                task.kind ===
+                'pricing'
+            ) {
+
+                await loadPricing();
+
+            }
+
+            else {
+
+                const projectPath =
+                    currentProject?.path;
+
+
+                await loadProjects();
+
+
+                currentProject =
+                    projects.find(
+                        project =>
+                            project.path ===
+                            projectPath
+                    );
+
+
+                renderMedia();
+
+            }
+
+
+            setStatus(
+                'تم استبدال الملف مع الحفاظ على مكانه.'
+            );
+
+        }
+
+        catch (error) {
+
+            setStatus(
+                error.message,
+                true
+            );
+
+        }
+
+    }
+);
+
+
+async function showDashboard() {
+
+    await resolveCurrentClient();
+
+    $('loginView')
+        .classList
+        .add(
+            'hidden'
+        );
+
+
+    $('dashboard')
+        .classList
+        .remove(
+            'hidden'
+        );
+
+
+    try {
+
+        await refreshAll();
+
+        if (
+            typeof rootLoadSmartCards ===
+            'function'
+        ) {
+
+            await rootLoadSmartCards();
+
+        }
+
+    }
+
+    catch (error) {
+
+        setStatus(
+            `${error.message} — إذا كان الخطأ 401 أو 403 فراجع Storage Policies.`,
+            true
+        );
+
+    }
+
+}
+
+
+(async () => {
+
+    try {
+
+        const raw =
+            localStorage.getItem(
+                SESSION_KEY
+            );
+
+
+        if (
+            raw
+        ) {
+
+            session =
+                JSON.parse(
+                    raw
+                );
+
+        }
+
+
+        if (
+            session
+        ) {
+
+            await getToken();
+
+            await showDashboard();
+
+        }
+
+    }
+
+    catch {
+
+        clearSession();
+
+    }
+
+})();
+
+</script>
+
+
+<script>
+
+/* ============================================================
+   ROOT LIGHT TAB NARRATOR ADMIN V19
+   ============================================================ */
+
+(() => {
+
+    function rootTabConfigPath() {
+
+    return (
+        `${TENANT_ROOT}/config/tab-intros.json`
+    );
+
+}
+
+
+    const elements = {
+
+        products:
+            document.getElementById(
+                'rootProductsIntro'
+            ),
+
+        about:
+            document.getElementById(
+                'rootAboutIntro'
+            ),
+
+        pricing:
+            document.getElementById(
+                'rootPricingIntro'
+            ),
+
+        form:
+            document.getElementById(
+                'rootTabNarrationForm'
+            ),
+
+        button:
+            document.getElementById(
+                'rootSaveTabNarration'
+            ),
+
+        status:
+            document.getElementById(
+                'rootTabNarrationStatus'
+            )
+
+    };
+
+
+    function setTabStatus(
+        message,
+        error = false
+    ) {
+
+        if (
+            !elements.status
+        ) {
+            return;
+        }
+
+
+        elements.status.textContent =
+            message || '';
+
+
+        elements.status.style.color =
+            error
+                ? '#ef5350'
+                : '#8eadcf';
+
+    }
+
+
+    async function loadTabNarrationConfig() {
+
+        try {
+
+            const response =
+                await fetch(
+                    publicUrl(rootTabConfigPath()),
+                    {
+                        cache:
+                            'no-store'
+                    }
+                );
+
+
+            if (
+                !response.ok
+            ) {
+
+                return;
+
+            }
+
+
+            const data =
+                await response.json();
+
+
+            if (
+                elements.products
+            ) {
+
+                elements.products.value =
+                    data.products ||
+                    '';
+
+            }
+
+
+            if (
+                elements.about
+            ) {
+
+                elements.about.value =
+                    data.about ||
+                    '';
+
+            }
+
+
+            if (
+                elements.pricing
+            ) {
+
+                elements.pricing.value =
+                    data.pricing ||
+                    '';
+
+            }
+
+        }
+
+        catch (error) {
+
+            console.warn(
+                'Tab narration config load:',
+                error
+            );
+
+        }
+
+    }
+
+
+    async function saveTabNarrationConfig(
+        event
+    ) {
+
+        event.preventDefault();
+
+
+        if (
+            !elements.button
+        ) {
+            return;
+        }
+
+
+        const oldHtml =
+            elements.button.innerHTML;
+
+
+        try {
+
+            elements.button.disabled =
+                true;
+
+
+            elements.button.innerHTML =
+                '<span class="spinner"></span> جاري الحفظ';
+
+
+            setTabStatus(
+                'جاري حفظ شرح التبويبات...'
+            );
+
+
+            const data = {
+
+                products:
+                    elements.products
+                        ?.value
+                        ?.trim() ||
+                    '',
+
+                about:
+                    elements.about
+                        ?.value
+                        ?.trim() ||
+                    '',
+
+                pricing:
+                    elements.pricing
+                        ?.value
+                        ?.trim() ||
+                    ''
+
+            };
+
+
+            const blob =
+                new Blob(
+                    [
+                        JSON.stringify(
+                            data,
+                            null,
+                            2
+                        )
+                    ],
+                    {
+                        type:
+                            'application/json'
+                    }
+                );
+
+
+            await uploadFile(rootTabConfigPath(),
+                blob
+            );
+
+
+            setTabStatus(
+                'تم حفظ شرح التبويبات بنجاح.'
+            );
+
+        }
+
+        catch (error) {
+
+            console.error(
+                error
+            );
+
+
+            setTabStatus(
+                error.message ||
+                'تعذر حفظ شرح التبويبات.',
+                true
+            );
+
+        }
+
+        finally {
+
+            elements.button.disabled =
+                false;
+
+
+            elements.button.innerHTML =
+                oldHtml;
+
+        }
+
+    }
+
+
+    elements.form
+        ?.addEventListener(
+            'submit',
+            saveTabNarrationConfig
+        );
+
+
+    loadTabNarrationConfig();
+
+})();
+
+/* ROOT LIGHT TAB NARRATOR ADMIN V19 END */
+
+</script>
+
+
+<script
+    src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"
+></script>
+
+
+<script>
+
+/* ============================================================
+   ROOT MULTI TENANT SMART CARD MANAGER
+   ============================================================ */
+
+function rootSmartLink(
+    code
+) {
+
+    return (
+        `https://yousofhatim77-dotcom.github.io/ROOT-SmartCard/r/?c=` +
+        encodeURIComponent(
+            code
+        )
+    );
+
+}
+
+
+function rootClientSiteLink() {
+
+    return (
+        `https://yousofhatim77-dotcom.github.io/ROOT-SmartCard/site/?site=` +
+        encodeURIComponent(
+            currentClient.slug
+        )
+    );
+
+}
+
+
+function rootRandomSmartCode(
+    length = 12
+) {
+
+    const alphabet =
+        'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+
+
+    const bytes =
+        new Uint8Array(
+            length
+        );
+
+
+    crypto.getRandomValues(
+        bytes
+    );
+
+
+    return Array
+        .from(
+            bytes,
+            item =>
+                alphabet[
+                    item %
+                    alphabet.length
+                ]
+        )
+        .join('');
+
+}
+
+
+function rootValidateUrl(
+    value
+) {
+
+    const url =
+        new URL(
+            value
+        );
+
+
+    if (
+        ![
+            'http:',
+            'https:'
+        ]
+        .includes(
+            url.protocol
+        )
+    ) {
+
+        throw new Error(
+            'الرابط يجب أن يبدأ بـ http أو https'
+        );
+
+    }
+
+
+    return url.toString();
+
+}
+
+
+async function rootSmartApi(
+    path,
+    options = {}
+) {
+
+    const token =
+        await getToken();
+
+
+    const headers = {
+
+        apikey:
+            SUPABASE_ANON_KEY,
+
+        Authorization:
+            `Bearer ${token}`,
+
+        ...(options.body
+            ? {
+                'Content-Type':
+                    'application/json'
+            }
+            : {}),
+
+        ...(options.headers || {})
+
+    };
+
+
+    const response =
+        await fetch(
+            `${SUPABASE_URL}/rest/v1/${path}`,
+            {
+                ...options,
+                headers
+            }
+        );
+
+
+    const data =
+        await response
+            .json()
+            .catch(
+                () => null
+            );
+
+
+    if (
+        !response.ok
+    ) {
+
+        throw new Error(
+            data?.message ||
+            data?.error ||
+            `API ${response.status}`
+        );
+
+    }
+
+
+    return data;
+
+}
+
+
+async function rootLoadSmartCards() {
+
+    if (
+        !currentClient?.id
+    ) {
+        return;
+    }
+
+
+    const grid =
+        document.getElementById(
+            'rootSmartCardsGrid'
+        );
+
+
+    if (
+        !grid
+    ) {
+        return;
+    }
+
+
+    grid.innerHTML =
+        '';
+
+
+    const cards =
+        await rootSmartApi(
+            `smart_cards` +
+            `?client_id=eq.${encodeURIComponent(currentClient.id)}` +
+            `&select=id,public_code,label,destination_url,enabled,created_at` +
+            `&order=created_at.asc`
+        );
+
+
+    if (
+        !Array.isArray(cards) ||
+        !cards.length
+    ) {
+
+        grid.innerHTML =
+            '<div class="empty">لا توجد كروت ذكية حتى الآن.</div>';
+
+        return;
+
+    }
+
+
+    cards.forEach(
+        card => {
+
+            const wrapper =
+                document.createElement(
+                    'article'
+                );
+
+
+            wrapper.className =
+                'root-smart-card';
+
+
+            const head =
+                document.createElement(
+                    'div'
+                );
+
+
+            head.className =
+                'root-smart-head';
+
+
+            const info =
+                document.createElement(
+                    'div'
+                );
+
+
+            const title =
+                document.createElement(
+                    'strong'
+                );
+
+
+            title.textContent =
+                card.label ||
+                'Smart Card';
+
+
+            const code =
+                document.createElement(
+                    'div'
+                );
+
+
+            code.className =
+                'root-smart-code';
+
+
+            code.textContent =
+                card.public_code;
+
+
+            info.append(
+                title,
+                code
+            );
+
+
+            const state =
+                document.createElement(
+                    'span'
+                );
+
+
+            state.className =
+                'muted';
+
+
+            state.textContent =
+                card.enabled
+                    ? 'نشط'
+                    : 'متوقف';
+
+
+            head.append(
+                info,
+                state
+            );
+
+
+            const qr =
+                document.createElement(
+                    'div'
+                );
+
+
+            qr.className =
+                'root-smart-qr';
+
+
+            new QRCode(
+                qr,
+                {
+                    text:
+                        rootSmartLink(
+                            card.public_code
+                        ),
+
+                    width:
+                        180,
+
+                    height:
+                        180,
+
+                    correctLevel:
+                        QRCode.CorrectLevel.H
+                }
+            );
+
+
+            const permanent =
+                document.createElement(
+                    'div'
+                );
+
+
+            permanent.className =
+                'root-smart-link';
+
+
+            permanent.textContent =
+                rootSmartLink(
+                    card.public_code
+                );
+
+
+            const destination =
+                document.createElement(
+                    'input'
+                );
+
+
+            destination.className =
+                'input';
+
+
+            destination.type =
+                'url';
+
+
+            destination.dir =
+                'ltr';
+
+
+            destination.value =
+                card.destination_url ||
+                '';
+
+
+            const actions =
+                document.createElement(
+                    'div'
+                );
+
+
+            actions.className =
+                'card-actions';
+
+
+            const save =
+                document.createElement(
+                    'button'
+                );
+
+
+            save.type =
+                'button';
+
+
+            save.className =
+                'btn small';
+
+
+            save.innerHTML =
+                '<i class="fa-solid fa-floppy-disk"></i> حفظ الرابط';
+
+
+            save.onclick =
+                async () => {
+
+                    try {
+
+                        const url =
+                            rootValidateUrl(
+                                destination.value.trim()
+                            );
+
+
+                        await rootSmartApi(
+                            `smart_cards?id=eq.${encodeURIComponent(card.id)}`,
+                            {
+                                method:
+                                    'PATCH',
+
+                                headers: {
+                                    Prefer:
+                                        'return=minimal'
+                                },
+
+                                body:
+                                    JSON.stringify({
+                                        destination_url:
+                                            url
+                                    })
+                            }
+                        );
+
+
+                        destination.value =
+                            url;
+
+
+                        save.innerHTML =
+                            '<i class="fa-solid fa-check"></i> تم';
+
+
+                        setTimeout(
+                            () => {
+
+                                save.innerHTML =
+                                    '<i class="fa-solid fa-floppy-disk"></i> حفظ الرابط';
+
+                            },
+                            1200
+                        );
+
+                    }
+                    catch (error) {
+
+                        alert(
+                            error.message
+                        );
+
+                    }
+
+                };
+
+
+            const copy =
+                document.createElement(
+                    'button'
+                );
+
+
+            copy.type =
+                'button';
+
+
+            copy.className =
+                'btn small secondary';
+
+
+            copy.innerHTML =
+                '<i class="fa-regular fa-copy"></i> نسخ الرابط';
+
+
+            copy.onclick =
+                async () => {
+
+                    await navigator.clipboard
+                        .writeText(
+                            rootSmartLink(
+                                card.public_code
+                            )
+                        );
+
+
+                    copy.innerHTML =
+                        '<i class="fa-solid fa-check"></i> تم النسخ';
+
+
+                    setTimeout(
+                        () => {
+
+                            copy.innerHTML =
+                                '<i class="fa-regular fa-copy"></i> نسخ الرابط';
+
+                        },
+                        1200
+                    );
+
+                };
+
+
+            const open =
+                document.createElement(
+                    'a'
+                );
+
+
+            open.className =
+                'btn small secondary';
+
+
+            open.target =
+                '_blank';
+
+
+            open.rel =
+                'noopener';
+
+
+            open.href =
+                rootSmartLink(
+                    card.public_code
+                );
+
+
+            open.innerHTML =
+                '<i class="fa-solid fa-arrow-up-right-from-square"></i> تجربة';
+
+
+            actions.append(
+                save,
+                copy,
+                open
+            );
+
+
+            wrapper.append(
+                head,
+                qr,
+                permanent,
+                destination,
+                actions
+            );
+
+
+            grid.append(
+                wrapper
+            );
+
+        }
+    );
+
+}
+
+
+document
+    .getElementById(
+        'rootCreateSmartCardForm'
+    )
+    ?.addEventListener(
+        'submit',
+        async event => {
+
+            event.preventDefault();
+
+
+            if (
+                !currentClient?.id ||
+                !session?.user?.id
+            ) {
+
+                return;
+
+            }
+
+
+            const status =
+                document.getElementById(
+                    'rootSmartCardStatus'
+                );
+
+
+            const name =
+                document
+                    .getElementById(
+                        'rootSmartCardName'
+                    )
+                    .value
+                    .trim();
+
+
+            const destinationInput =
+                document
+                    .getElementById(
+                        'rootSmartCardDestination'
+                    );
+
+
+            try {
+
+                status.textContent =
+                    'جاري إنشاء الكارت...';
+
+
+                const destination =
+                    rootValidateUrl(
+                        destinationInput.value.trim() ||
+                        rootClientSiteLink()
+                    );
+
+
+                let created =
+                    false;
+
+
+                for (
+                    let attempt = 0;
+                    attempt < 4;
+                    attempt++
+                ) {
+
+                    const code =
+                        rootRandomSmartCode();
+
+
+                    try {
+
+                        await rootSmartApi(
+                            'smart_cards',
+                            {
+                                method:
+                                    'POST',
+
+                                headers: {
+                                    Prefer:
+                                        'return=minimal'
+                                },
+
+                                body:
+                                    JSON.stringify({
+
+                                        owner_id:
+                                            session.user.id,
+
+                                        client_id:
+                                            currentClient.id,
+
+                                        public_code:
+                                            code,
+
+                                        label:
+                                            name ||
+                                            'Smart Card',
+
+                                        destination_url:
+                                            destination,
+
+                                        enabled:
+                                            true
+
+                                    })
+                            }
+                        );
+
+
+                        created =
+                            true;
+
+                        break;
+
+                    }
+                    catch (error) {
+
+                        if (
+                            attempt ===
+                            3
+                        ) {
+
+                            throw error;
+
+                        }
+
+                    }
+
+                }
+
+
+                if (
+                    !created
+                ) {
+
+                    throw new Error(
+                        'تعذر إنشاء معرف للكارت.'
+                    );
+
+                }
+
+
+                event.target.reset();
+
+
+                destinationInput.value =
+                    rootClientSiteLink();
+
+
+                status.textContent =
+                    'تم إنشاء QR ذكي بنجاح.';
+
+
+                await rootLoadSmartCards();
+
+            }
+            catch (error) {
+
+                status.textContent =
+                    error.message;
+
+                status.classList.add(
+                    'err'
+                );
+
+            }
+
+        }
+    );
+
+
+/*
+ * Existing session may have opened the dashboard
+ * before this script loaded.
+ */
+
+setTimeout(
+    async () => {
+
+        if (
+            currentClient?.id
+        ) {
+
+            const destination =
+                document.getElementById(
+                    'rootSmartCardDestination'
+                );
+
+
+            if (
+                destination &&
+                !destination.value
+            ) {
+
+                destination.value =
+                    rootClientSiteLink();
+
+            }
+
+
+            await rootLoadSmartCards()
+                .catch(
+                    console.error
+                );
+
+        }
+
+    },
+    0
+);
+
+</script>
 
 </body>
-
 </html>
