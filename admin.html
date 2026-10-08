@@ -1,0 +1,182 @@
+﻿<!doctype html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>ROOT SmartCard Dashboard</title>
+
+<link rel="stylesheet" href="styles.css">
+
+</head>
+
+
+<body>
+
+
+<main class="shell dashboard">
+
+
+<header class="topbar">
+
+<strong>
+ROOT SmartCard
+</strong>
+
+<button
+id="logoutBtn"
+class="btn hidden"
+type="button"
+>
+Sign out
+</button>
+
+</header>
+
+
+
+<section
+id="configWarning"
+class="notice hidden"
+></section>
+
+
+
+<section
+id="loginView"
+class="panel auth-panel"
+>
+
+<h1>
+Dashboard
+</h1>
+
+<p class="muted">
+Manage the destination linked to your physical QR / NFC card.
+</p>
+
+
+<form id="loginForm">
+
+<label>
+Email
+<input
+id="email"
+type="email"
+required
+>
+</label>
+
+
+<label>
+Password
+<input
+id="password"
+type="password"
+required
+>
+</label>
+
+
+<button
+class="btn primary"
+type="submit"
+>
+Sign in
+</button>
+
+</form>
+
+
+<p
+id="loginStatus"
+class="status"
+></p>
+
+</section>
+
+
+
+<section
+id="dashboardView"
+class="hidden"
+>
+
+<div class="panel">
+
+<h2>
+Create Smart Card
+</h2>
+
+
+<form id="createForm">
+
+<label>
+Card name
+
+<input
+id="cardName"
+type="text"
+placeholder="My Business Card"
+required
+>
+
+</label>
+
+
+<label>
+Destination URL
+
+<input
+id="destinationUrl"
+type="url"
+placeholder="https://example.com"
+required
+>
+
+</label>
+
+
+<button
+class="btn primary"
+type="submit"
+>
+Create Card
+</button>
+
+</form>
+
+
+<p
+id="createStatus"
+class="status"
+></p>
+
+</div>
+
+
+
+<div
+id="cards"
+class="cards"
+></div>
+
+
+</section>
+
+
+</main>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+
+
+</body>
+
+</html>

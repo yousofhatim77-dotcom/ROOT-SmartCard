@@ -1,0 +1,2 @@
+﻿[functions.resolve-card]
+verify_jwt = false

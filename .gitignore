@@ -1,0 +1,17 @@
+# Supabase local metadata
+supabase/.temp/
+
+# Remote migration history needed locally by Supabase CLI,
+# but not part of ROOT SmartCard public source.
+supabase/migrations/*
+!supabase/migrations/20261009020000_root_smartcard_init.sql
+
+# Local backups
+backup-*/
+broken-*/
+*-snapshot-*/
+
+# Secrets / local environment
+.env
+.env.*
+!.env.example
