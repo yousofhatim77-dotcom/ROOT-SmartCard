@@ -84,16 +84,16 @@ const SITE_CONFIG_PATH =
 const DEFAULT_PUBLIC_SITE_CONFIG = {
 
     brandName:
-        'ROOT dent',
+        '',
 
     browserTitle:
-        'ROOT dent',
+        '',
 
     navProducts:
         'منتجاتنا',
 
     navAbout:
-        'شعارنا',
+        'عنّا',
 
     navPricing:
         'قائمة الأسعار',
@@ -102,19 +102,19 @@ const DEFAULT_PUBLIC_SITE_CONFIG = {
         'فيسبوك',
 
     facebookUrl:
-        'https://www.facebook.com/profile.php?id=61593184389536',
+        '',
 
     whatsappLabel:
         'واتساب',
 
     whatsappNumber:
-        '201040296832',
+        '',
 
     phoneLabel:
-        '01040296832',
+        'اتصال',
 
     phoneNumber:
-        '+201040296832'
+        ''
 
 };
 
@@ -248,7 +248,7 @@ function applyPublicSiteConfig() {
     ) {
 
         logoImage.alt =
-            `شعار ${config.brandName || 'ROOT dent'}`;
+            `شعار ${config.brandName || 'الموقع'}`;
 
     }
 
@@ -400,6 +400,330 @@ async function loadPublicSiteConfig() {
     applyPublicSiteConfig();
 
 }
+
+
+/* ============================================================
+   ROOT EMPTY TENANT V1
+   ============================================================ */
+
+function rootHasTenantValue(value) {
+
+    return String(
+        value ?? ''
+    ).trim().length > 0;
+
+}
+
+
+function rootApplyTenantPresentation() {
+
+    const config =
+        publicSiteConfig || {};
+
+
+    /*
+     * Page title
+     */
+
+    document.title =
+        config.browserTitle ||
+        config.brandName ||
+        '';
+
+
+    /*
+     * Footer brand
+     */
+
+    const footerBrand =
+        document.querySelector(
+            '.footer-brand'
+        );
+
+
+    if (footerBrand) {
+
+        const strong =
+            footerBrand.querySelector(
+                'strong'
+            );
+
+
+        if (strong) {
+
+            strong.textContent =
+                config.brandName || '';
+
+        }
+
+
+        footerBrand.style.display =
+            rootHasTenantValue(
+                config.brandName
+            )
+                ? ''
+                : 'none';
+
+    }
+
+
+    /*
+     * Facebook
+     */
+
+    const facebookIcon =
+        document.querySelector(
+            '.footer-contacts .fa-facebook'
+        );
+
+
+    const facebook =
+        facebookIcon?.closest(
+            'a'
+        );
+
+
+    if (facebook) {
+
+        if (
+            rootHasTenantValue(
+                config.facebookUrl
+            )
+        ) {
+
+            facebook.href =
+                config.facebookUrl;
+
+            facebook.style.display =
+                '';
+
+        }
+
+        else {
+
+            facebook.removeAttribute(
+                'href'
+            );
+
+            facebook.style.display =
+                'none';
+
+        }
+
+    }
+
+
+    /*
+     * WhatsApp
+     */
+
+    const whatsapp =
+        document.querySelector(
+            '.whatsapp-link'
+        );
+
+
+    if (whatsapp) {
+
+        const number =
+            String(
+                config.whatsappNumber ||
+                ''
+            )
+            .replace(
+                /\D/g,
+                ''
+            );
+
+
+        if (number) {
+
+            whatsapp.href =
+                'https://wa.me/' +
+                number;
+
+            whatsapp.style.display =
+                '';
+
+        }
+
+        else {
+
+            whatsapp.removeAttribute(
+                'href'
+            );
+
+            whatsapp.style.display =
+                'none';
+
+        }
+
+    }
+
+
+    /*
+     * Phone
+     */
+
+    const phone =
+        document.querySelector(
+            '.phone-link'
+        );
+
+
+    if (phone) {
+
+        if (
+            rootHasTenantValue(
+                config.phoneNumber
+            )
+        ) {
+
+            phone.href =
+                'tel:' +
+                config.phoneNumber;
+
+            phone.style.display =
+                '';
+
+        }
+
+        else {
+
+            phone.removeAttribute(
+                'href'
+            );
+
+            phone.style.display =
+                'none';
+
+        }
+
+    }
+
+
+    /*
+     * Hide contact container
+     */
+
+    const contacts =
+        document.querySelector(
+            '.footer-contacts'
+        );
+
+
+    if (contacts) {
+
+        const hasContacts =
+            rootHasTenantValue(
+                config.facebookUrl
+            )
+            ||
+            rootHasTenantValue(
+                config.whatsappNumber
+            )
+            ||
+            rootHasTenantValue(
+                config.phoneNumber
+            );
+
+
+        contacts.style.display =
+            hasContacts
+                ? ''
+                : 'none';
+
+    }
+
+
+    /*
+     * Customer logo
+     */
+
+    const logoBox =
+        document.getElementById(
+            'labLogo'
+        );
+
+
+    const logoImage =
+        logoBox?.querySelector(
+            'img'
+        );
+
+
+    if (
+        logoBox &&
+        logoImage
+    ) {
+
+        logoBox.style.display =
+            'none';
+
+
+        logoImage.onload =
+            () => {
+
+                if (
+                    logoImage.naturalWidth >
+                    0
+                ) {
+
+                    logoBox.style.display =
+                        '';
+
+                }
+
+            };
+
+
+        logoImage.onerror =
+            () => {
+
+                logoBox.style.display =
+                    'none';
+
+            };
+
+    }
+
+}
+
+
+/*
+ * Missing About image
+ */
+
+document.addEventListener(
+    'error',
+    event => {
+
+        if (
+            event.target?.id !==
+            'aboutLogoImage'
+        ) {
+
+            return;
+
+        }
+
+
+        const container =
+            event.target.closest(
+                '.about-image-container'
+            );
+
+
+        if (container) {
+
+            container.style.display =
+                'none';
+
+        }
+
+    },
+    true
+);
 
 /* ROOT PUBLIC SITE CONFIG V8 END */
 
@@ -6128,6 +6452,8 @@ document.addEventListener(
         setupNavButtons();
 
         await loadPublicSiteConfig();
+
+        rootApplyTenantPresentation();
         // ROOT LOGO CACHE FIX
         const rootLogoImage =
             labLogo
@@ -6298,7 +6624,7 @@ function rootEnsureNarratorBubble() {
     ) {
 
         let brandName =
-            'ROOT dent';
+            'الموقع';
 
 
         if (
