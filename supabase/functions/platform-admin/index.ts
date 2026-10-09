@@ -1397,6 +1397,141 @@ Deno.serve(
         }
 
 
+
+        // ====================================================
+        // ROOT PLATFORM DESTINATION ADMIN V1
+        // Change card destination without changing QR/code
+        // ====================================================
+
+        if (
+            action ===
+            "update_card_destination"
+        ) {
+
+            const publicCode =
+                String(
+                    body?.public_code ||
+                    ""
+                )
+                .trim()
+                .toUpperCase();
+
+
+            const destinationUrl =
+                String(
+                    body?.destination_url ||
+                    ""
+                )
+                .trim();
+
+
+            if (
+                !/^[A-Z0-9]{8,32}$/
+                    .test(
+                        publicCode
+                    )
+            ) {
+
+                return reply(
+                    {
+                        error:
+                            "INVALID_CARD_CODE"
+                    },
+                    400
+                );
+
+            }
+
+
+            if (
+                !validHttpUrl(
+                    destinationUrl
+                )
+            ) {
+
+                return reply(
+                    {
+                        error:
+                            "INVALID_DESTINATION"
+                    },
+                    400
+                );
+
+            }
+
+
+            const {
+                data:
+                    card,
+                error:
+                    updateError
+            } =
+                await admin
+                    .from(
+                        "smart_cards"
+                    )
+                    .update({
+
+                        destination_url:
+                            destinationUrl
+
+                    })
+                    .eq(
+                        "public_code",
+                        publicCode
+                    )
+                    .select(
+                        "id,public_code,label,destination_url,status,client_id,owner_id,enabled,updated_at"
+                    )
+                    .maybeSingle();
+
+
+            if (
+                updateError
+            ) {
+
+                console.error(
+                    updateError
+                );
+
+
+                return reply(
+                    {
+                        error:
+                            "DESTINATION_UPDATE_FAILED"
+                    },
+                    500
+                );
+
+            }
+
+
+            if (
+                !card
+            ) {
+
+                return reply(
+                    {
+                        error:
+                            "CARD_NOT_FOUND"
+                    },
+                    404
+                );
+
+            }
+
+
+            return reply({
+
+                ok:
+                    true,
+
+                card
+
+            });
+
+        }
+
         return reply(
             {
                 error:
